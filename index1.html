@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head onload="runJS()">
+        <meta charset="utf-8">
+        <title>
+            Madi Paint Editor!
+        </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="shortcut icon" href="paint.svg" type="image/x-icon">
+    </head>
+    <body onload="runJS()">
+    <div class="flex1">
+    <img src="paint.svg" alt="brush" width="30px">
+    <button type="submit" id="button-colour" onclick="openColorpicker()"><div id="colour-preview"></div></button>
+    
+    <button type="submit" onclick="clearCanvas()">Clear the canvas</button>
+    
+    <input id="hex" placeholder="enter hex color..." value="rgba(000, 000, 000, 255)"></input>
+    <input type="number" name="size" id="size" value="3" min="1" placeholder="enter a valid size value...">
+    <input id="hex1" placeholder="enter an valid background color..." value="rgba(255, 255, 255, 255)"></input>
+    <div id="colour-window" style="margin-top: 15px; margin-left: 45px;">
+      <div class="flex2">
+        <h2 style="margin-top: 10px; margin-left: 5px;">Colour Picker</h2>
+        <img src="close.svg" alt="close button" onclick="openColorpicker()" style="margin-left: 33%; width: 30px;">
+      </div>
+      <canvas id="colorCanvas" class="color-canvas" width="auto" height="160" style="margin-left: 0px;"></canvas>
+      
+      <div id="color-preview-html"><p id="rgb-values"></p></div>
+    </div>
+    <div id="canvas-style"><canvas id="draw"></canvas></div>
+    </div>
+    <div id="note">
+      <p>Touch support is hard, so make me an .js file that has touch controls</p>
+    </div>
+    <script>
+    // set canvas id to variable
+var canvas = document.getElementById("draw");
+
+var ctx = canvas.getContext("2d");
+
+function openColorpicker() {
+  var x = document.getElementById("colour-window");
+  var y = document.getElementById("draw");
+  var m = "block";
+  if (x.style.display === "none") {
+    x.style.display = "block";
+    m = "block";
+  } else {
+    x.style.display = "none";
+    m = "none";
+  }
+
+  if (m === "block") {
+    y.style.cursor = "click";
+    document.removeEventListener("mousemove", draw);
+    document.removeEventListener("mousedown" ,setPosition)
+    document.removeEventListener("mouseenter", setPosition);
+    document.removeEventListener("ontouchmove", draw);
+    document.removeEventListener("ontouchdown" ,setPosition)
+    document.removeEventListener("ontouchenter", setPosition);
+
+  console.log("Canvas Stopped!");
+  } else {
+    y.style.cursor = "crosshair";
+
+document.addEventListener("mousemove", draw);
+document.addEventListener("mousedown", setPosition);
+document.addEventListener("mouseenter", setPosition);
+document.addEventListener("ontouchmove", draw);
+document.addEventListener("ontouchdown" ,setPosition)
+document.addEventListener("ontouchenter", setPosition);
+  }
+window.addEventListener("onload", resize);
+  var y = document.getElementById("canvas-style");
+
+}
+
+function clearCanvas(){
+var canvas = document.getElementById("draw");
+var ctx = canvas.getContext("2d");
+ctx.clearRect(0, 0, canvas.width, canvas.height);
+}
+
+function runJS() {
+  document.getElementById("colour-preview").style.backgroundColor = document.getElementById("hex").value;
+  document.getElementById("color-preview-html").style.backgroundColor = document.getElementById("hex").value;
+  document.getElementById("rgb-values").innerHTML = document.getElementById("hex").value;
+  document.getElementById("draw").style.backgroundColor = document.getElementById("hex1").value;
+  if(document.getElementById("hex1").value === "") {
+    document.getElementById("draw").style.backgroundColor = "#ffffff"
+  }else{
+    document.getElementById("hex1").value
+  }
+  setTimeout(runJS, 0000);
+}
+window.addEventListener("onload", runJS);
+     </script>
+    <script>
+function initColorPicker() {
+  var canvas = document.getElementById('colorCanvas');
+  var canvasContext = canvas.getContext('2d');
+
+  let gradient = canvas.getContext('2d').createLinearGradient(0, 0, canvas.width, 0)
+  gradient.addColorStop(0, '#ff0000')
+  gradient.addColorStop(1 / 6, '#ffff00')
+  gradient.addColorStop((1 / 6) * 2, '#00ff00')
+  gradient.addColorStop((1 / 6) * 3, '#00ffff')
+  gradient.addColorStop((1 / 6) * 4, '#0000ff')
+  gradient.addColorStop((1 / 6) * 5, '#ff00ff')
+  gradient.addColorStop(1, '#ff0000')
+  canvas.getContext('2d').fillStyle = gradient
+  canvas.getContext('2d').fillRect(0, 0, canvas.width, canvas.height)
+
+  gradient = canvas.getContext('2d').createLinearGradient(0, 0, 0, canvas.height)
+  gradient.addColorStop(0, 'rgba(255, 255, 255, 1)')
+  gradient.addColorStop(0.5, 'rgba(255, 255, 255, 0)')
+  gradient.addColorStop(1, 'rgba(255, 255, 255, 0)')
+  canvas.getContext('2d').fillStyle = gradient
+  canvas.getContext('2d').fillRect(0, 0, canvas.width, canvas.height)
+
+  gradient = canvas.getContext('2d').createLinearGradient(0, 0, 0, canvas.height)
+  gradient.addColorStop(0, 'rgba(0, 0, 0, 0)')
+  gradient.addColorStop(0.5, 'rgba(0, 0, 0, 0)')
+  gradient.addColorStop(1, 'rgba(0, 0, 0, 1)')
+  canvas.getContext('2d').fillStyle = gradient
+  canvas.getContext('2d').fillRect(0, 0, canvas.width, canvas.height)
+
+
+  canvas.onclick = function(e) {
+  	console.log()
+    var imgData = canvasContext.getImageData((e.offsetX / canvas.clientWidth) * canvas.width, (e.offsetY / canvas.clientHeight) * canvas.height, 1, 1)
+    var rgba = imgData.data;
+    var color = "rgba(" + rgba[0] + ", " + rgba[1] + ", " + rgba[2] + ", " + rgba[3] + ")";
+        var textbox = document.getElementById("hex");
+    textbox.value = "" + color, "color:" + color;
+  }
+}
+
+initColorPicker()
+
+    </script>
+    <style>
+    button{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 100;
+    letter-spacing: 0px;
+    word-spacing: 0px;
+    color: #000000;
+    font-weight: 700;
+    text-decoration: none solid rgb(68, 68, 68);
+    font-style:normal;
+    font-variant: normal;
+    text-transform: none;
+    }
+    input{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 100;
+    letter-spacing: 0px;
+    word-spacing: 0px;
+    color: #000000;
+    font-weight: 700;
+    text-decoration: none solid rgb(68, 68, 68);
+    font-style:normal;
+    font-variant: normal;
+    text-transform: none;
+    }
+
+    button:hover{
+  border-width: 1.5px;
+  background-color: #4a93de;
+  color: #fff;
+  appearance: auto;
+    writing-mode: horizontal-tb !important;
+    text-rendering: auto;
+    letter-spacing: normal;
+    word-spacing: normal;
+    line-height: normal;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
+    display: inline-block;
+    text-align: center;
+    align-items: flex-start;
+    cursor: default;
+    box-sizing: border-box;
+    padding: 1px 6px;
+    border-width: 2px;
+    border-style: outset;
+    border-color: transparent;
+    border-image: initial;
+}
+
+
+      /*/ The canvas, in CSS so that the user can see wheres the canvas /*/
+       #draw{
+         position: absolute;
+         left: 0;
+        
+        background-color: #ffffff;
+        margin-top: 15px;
+        margin-left: 15px;
+        border-radius: 10px;
+            }
+       #canvas-style{
+        display: block;
+         position: absolute;
+         left: 0;
+         margin-top: 37px;
+         background-color: rgb(167, 167, 167);
+       border-width: 10px;
+       border-color: rgb(167, 167, 167);
+       border-radius: 10px;
+       width: 530px;
+       height: 420px;
+       }
+
+       /*/ Other, so yeah /*/
+      .flex1{
+        display: flex;
+        height: 30px;
+      }
+      
+      .flex2{
+        border-radius: 10px;
+        background-color: #ffffff;
+        display: flex;
+        max-height: 48px;
+      }
+       .color-canvas{
+         border-top-left-radius: 10px;
+         border-top-right-radius: 10px;
+       }
+
+       #button-colour{
+         width: 30px;
+       }
+     
+      #colour-preview{
+        width: 100%;
+        height: 15px;
+      }
+
+      #colour-window{
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: auto;
+        letter-spacing: 0px;
+        word-spacing: 0px;
+        color: #000000;
+        font-weight: 700;
+        text-decoration: none solid rgb(68, 68, 68);
+        font-style: normal;
+        font-variant: normal;
+        text-transform: none;
+        
+        border-radius: 10px;
+        border-top-left-radius: 0px;
+        background-color: #ffffff;
+        position: absolute;
+        z-index: 999;
+        -webkit-box-shadow: 7px 7px 13px 4px #656565; 
+        box-shadow: 7px 7px 13px 4px #656565;
+        }
+
+      #color-preview-html{
+        margin-top: -4px;
+        width: 100%;
+        height: 25px;
+        text-align: center;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+      }
+
+      #rgb-values{
+        position: absolute;
+        left: 0;
+        right: 0;
+        
+      margin-bottom: 5px;
+      margin-top: 3px;
+      filter: saturate(0) grayscale(1) brightness(.7) contrast(100%) invert(100%);
+    }
+
+    #note{
+      position: absolute;
+      display: block;
+      bottom: 0;
+      color: #cecece;
+
+      font-family: Arial, Helvetica, sans-serif;
+    font-size: 100;
+    letter-spacing: 0px;
+    word-spacing: 0px;
+    font-weight: 700;
+    text-decoration: none solid rgb(68, 68, 68);
+    font-style:normal;
+    font-variant: normal;
+    text-transform: none;
+    }
+    </style>
+    <script>
+
+
+resize();
+
+// resize canvas when window is resized
+function resize() {
+  ctx.canvas.width =  500;
+  ctx.canvas.height = 390;
+}
+
+// initialize position as 0,0
+var pos = { x: 0, y: 0 };
+
+// new position from mouse events
+function setPosition(e) {
+  pos.x = e.pageX -15.0;
+  pos.y = e.pageY -60;
+}
+
+function draw(e) {
+  if (e.buttons !== 1) return; // if mouse is not clicked, do not go further
+  var size = document.getElementById("size").value;
+  var color = document.getElementById("hex").value;
+
+  ctx.beginPath(); // begin the drawing path
+
+  ctx.lineWidth = size; // width of line
+  ctx.lineCap = "round"; // rounded end cap
+  ctx.strokeStyle = color; // hex color of line
+
+  ctx.moveTo(pos.x, pos.y); // from position
+  setPosition(e);
+  ctx.lineTo(pos.x, pos.y); // to position
+
+  ctx.stroke(); // draw it!
+}
+    </script>
+  </body>
+    </html>
