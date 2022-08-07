@@ -8,95 +8,889 @@
         </title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="shortcut icon" href="paint.svg" type="image/x-icon">
+        <script src="libs/jquery-3.6.0.min.js"></script>
+        <script src="libs/jquery-ui-1.13.1.custom/jquery-ui.min.js"></script>
+        <link rel="stylesheet" href="libs/jquery-ui-1.13.1.custom/jquery-ui.min.css">
     </head>
     <body onload="runJS()">
-    <div class="flex1">
-    <img src="paint.svg" alt="brush" width="30px">
-    <button type="submit" id="button-colour" onclick="openColorpicker()"><div id="colour-preview"></div></button>
+      <!--            
+                       ###              #
+                      ###             #  
+                    ###             #    
+               ___###             #      
+              /@@@@/           #####     
+              /@@@@/          ###        
+              /@/            #           
+               =                          
+
+##       ##    ######    #####    ###  |   #####     ######    ###  ##      #  #####
+# #     # #   #      #   #    #    #   |   #    #   #      #    #   # #     #    #
+#  #   #  #  ##########  #     #   #   |   #    #  ##########   #   #  #    #    #
+#   # #   #  #        #  #     #   #   |   #####   #        #   #   #   #   #    #
+#    #    #  #        #  #     #   #   |   #       #        #   #   #    #  #    #
+#         #  #        #  #    #    #   |   #       #        #   #   #     # #    #
+#         #  #        #  #####    ###  |   #       #        #  ###  #      ##    #
+
+  This code is from https://github.com/wojtekcodestoday/madi-paint.
+  That is from version 1.1, the latest version of Madi Paint Editor
+   is in https://wojtekcodestoday.github.io/madi-paint,
+    also DON'T modify this file, or the editor will break.
+    Have a nide day ;)
+    -Wojtek ( WojtekCodesToday )
+      -->
+      <script>
+        // jQuery code area.
+          $( function() {
+        $("#colour-window").draggable({ handle: ".flex2" });
+        $("#text-window").draggable({ handle: ".flex2" });
+        $("#custom-colors").sortable({ handle: ".handle" });
+        } );
+      </script>
+      <div style="background-color: #656565AA; position: absolute;
+      left:0;
+      width: 100%;
+      height: 100%;
+      z-index: 1500; 
+      cursor:not-allowed" id="new">
+
+    <div style="
+      width: 530px;
+      height: 280px;
+      top: 50%;
+      left: 50%;
+      margin: -250px 0 0 -250px;
+      font-family: Arial, Helvetica, sans-serif;
+    letter-spacing: 2px;
+    word-spacing: 2px;
+    color: #000000;
+    font-weight: 700;
+    text-decoration: none;
+    font-style: normal;
+    font-variant: normal;
+    text-transform: none;
+    text-align: center;
     
-    <button type="submit" onclick="clearCanvas()">Clear the canvas</button>
-    
-    <input id="hex" placeholder="enter hex color..." value="rgba(000, 000, 000, 255)"></input>
-    <input type="number" name="size" id="size" value="3" min="1" placeholder="enter a valid size value...">
-    <input id="hex1" placeholder="enter an valid background color..." value="rgba(255, 255, 255, 255)"></input>
-    <div id="colour-window" style="margin-top: 15px; margin-left: 45px;">
-      <div class="flex2">
-        <h2 style="margin-top: 10px; margin-left: 5px;">Colour Picker</h2>
-        <img src="close.svg" alt="close button" onclick="openColorpicker()" style="margin-left: 33%; width: 30px;">
+    position: absolute;
+    display: block;
+    align-self: center; align-content: center; align-items: center;
+    background-color: #FFFFFF; 
+    z-index: 1000;
+    -webkit-box-shadow: 0px 5px 9px 5px rgba(0,0,0,0.82); 
+    box-shadow: 0px 5px 9px 5px rgba(0,0,0,0.82);
+    cursor: default;"><div width="200px"> <h1><?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="30px" height="30px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="202" height="222" viewBox="0 0 202 222" xml:space="preserve">
+<defs>
+</defs>
+<g transform="matrix(1 0 0 1 119.59 82.1)"  >
+<path style="stroke: rgb(0,0,0); stroke-opacity: 0; stroke-width: 2; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(74,147,222); fill-rule: nonzero; opacity: 1;"  transform=" translate(-303.59, -197.1)" d="M 222 247 L 353.6605483810545 115.33945161894547 L 385.17173177712124 146.8506350150122 L 253.15497117995582 278.86739561217763 L 222 247" stroke-linecap="round" />
+</g>
+<g transform="matrix(-0.71 0 0 0.71 29.11 172.18)"  >
+<circle style="stroke: rgb(0,0,0); stroke-opacity: 0; stroke-width: 2; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(74,147,222); fill-rule: nonzero; opacity: 1;"  cx="0" cy="0" r="40" />
+</g>
+<g transform="matrix(-0.52 -0.14 0.14 -0.52 21.27 199.32)"  >
+<polygon style="stroke: rgb(0,0,0); stroke-opacity: 0; stroke-width: 2; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(74,147,222); fill-rule: nonzero; opacity: 1;"  points="0,-42.5 50,42.5 -50,42.5 " />
+</g>
+<g transform="matrix(1 0 0 1 -618 -183)"  >
+<line style="stroke: rgb(0,0,0); stroke-width: 2; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1;" vector-effect="non-scaling-stroke"  x1="0" y1="0" x2="0" y2="0" />
+</g>
+</svg>Create a new painting</h1>
+    <div style=" position:absolute; left:0; right:0; display:flex; height:180px; align-items: center; text-align: center;">
+      <button type="submit" onclick="closeNew()" style="width: 130px; height: 180px; display:block; margin-left:20px;">
+        <img width="100px"  src="data:image/png;base64,
+        iVBORw0KGgoAAAANSUhEUgAAAlkAAAGPCAYAAABvd8XoAAAAAXNSR0IArs4c6QAAIABJREFUeF7t2LFtImEURtFHA1hCBFRAC05dw24zONmUttzDRLAlGHAJrCwnW8KR5rqCf3z06V1783w+zzNzmn6I38DtdpvH40G8pUfMbLfbj8Ph8NbvwvgNtA/
+        D4b9XvB+Px5duiOPSRhyL75dsiiwLpIFYHkWW5dE+LI+ZKbIwkjZigRRZlsc0EAukyLI82oflUWRxHt0QjKTIwkA6IhZIkWV5tA/
+        Lo8jiPIosjKTIwkA6IhZIkWV5tA/
+        Lo8jiPIosjKTIwkA6IhZIkWV5tA/
+        Lo8jiPIosjKTIwkA6IhZIkWV5tA/
+        Lo8jiPIosjKTIwkA6IhZIkWV5tA/
+        Lo8jiPIosjKTIwkA6IhZIkWV5tA/
+        Lo8jiPIosjKTIwkA6IhZIkWV5tA/
+        Lo8jiPIosjKTIwkA6IhZIkWV5tA/
+        Lo8jiPIosjKTIwkA6IhZIkWV5tA/
+        Lo8jiPIosjKTIwkA6IhZIkWV5tA/
+        Lo8jiPIosjKTIwkA6IhZIkWV5tA/
+        Lo8jiPIosjKTIwkA6IhZIkWV5tA/
+        Lo8jiPIosjKTIwkA6IhZIkWV5tA/
+        Lo8jiPIosjKTIwkA6IhZIkWV5tA/
+        Lo8jiPIosjKTIwkA6IhZIkWV5tA/
+        Lo8jiPIosjKTIwkA6IhZIkWV5tA/
+        Lo8jiPIosjKTIwkA6IhZIkWV5tA/
+        Lo8jiPIosjKTIwkA6IhZIkWV5tA/
+        Lo8jiPIosjKTIwkA6IhZIkWV5tA/
+        Lo8jiPIosjKTIwkA6IhZIkWV5tA/
+        Lo8jiPIosjKTIwkA6IhZIkWV5tA/
+        Lo8jiPIosjKTIwkA6IhZIkWV5tA/
+        Lo8jiPIosjKTIwkA6IhZIkWV5tA/
+        Lo8jiPIosjKTIwkA6IhZIkWV5tA/
+        Lo8jiPIosjKTIwkA6IhZIkWV5tA/
+        Lo8jiPIosjKTIwkA6IhZIkWV5tA/
+        Lo8jiPIosjKTIwkA6IhZIkWV5tA/
+        Lo8jiPIosjKTIwkA6IhZIkWV5tA/
+        Lo8jiPIosjKTIwkA6IhZIkWV5tA/
+        Lo8jiPIosjKTIwkA6IhZIkWV5tA/
+        Lo8jiPIosjKTIwkA6IhZIkWV5tA/
+        Lo8jiPIosjKTIwkA6IhZIkWV5tA/
+        Lo8jiPIosjKTIwkA6IhZIkWV5tA/
+        Lo8jiPIosjKTIwkA6IhZIkWV5tA/
+        Lo8jiPIosjKTIwkA6IhZIkWV5tA/
+        Lo8jiPIosjKTIwkA6IhZIkWV5tA/
+        Lo8jiPIosjKTIwkA6IhZIkWV5tA/
+        Lo8jiPIosjKTIwkA6IhZIkWV5tA/
+        Lo8jiPIosjKTIwkA6IhZIkWV5tA/
+        Lo8jiPIosjKTIwkA6IhZIkWV5tA/
+        Lo8jiPIosjKTIwkA6IhZIkWV5tA/
+        Lo8jiPIosjKTIwkA6IhZIkWV5tA/
+        Lo8jiPIosjKTIwkA6IhZIkWV5tA/
+        Lo8jiPIosjKTIwkA6IhZIkWV5tA/
+        Lo8jiPIosjKTIwkA6IhZIkWV5tA/
+        Lo8jiPIosjKTIwkA6IhZIkWV5tA/
+        Lo8jiPIosjKTIwkA6IhZIkWV5tA/
+        Lo8jiPIosjKTIwkA6IhZIkWV5tA/
+        Lo8jiPIosjKTIwkA6IhZIkWV5tA/
+        Lo8jiPIosjKTIwkA6IhZIkWV5tA/
+        Lo8jiPIosjKTIwkA6IhZIkWV5tA/
+        Lo8jiPIosjKTIwkA6IhZIkWV5tA/
+        Lo8jiPIosjKTIwkA6IhZIkWV5tA/
+        Lo8jiPIosjKTIwkA6IhZIkWV5tA/
+        Lo8jiPIosjKTIwkA6IhZIkWV5tA/
+        Lo8jiPIosjKTIwkA6IhZIkWV5tA/
+        Lo8jiPIosjKTIwkA6IhZIkWV5tA/
+        Lo8jiPIosjKTIwkA6IhZIkWV5tA/
+        Lo8jiPIosjKTIwkA6IhZIkWV5tA/
+        Lo8jiPIosjKTIwkA6IhZIkWV5tA/
+        Lo8jiPIosjKTIwkA6IhZIkWV5tA/
+        Lo8jiPIosjKTIwkA6IhZIkWV5tA/
+        Lo8jiPIosjKTIwkA6IhZIkWV5tA/
+        Lo8jiPIosjKTIwkA6IhZIkWV5tA/
+        Lo8jiPIosjKTIwkA6IhZIkWV5tA/
+        Lo8jiPIosjKTIwkA6IhZIkWV5tA/
+        Lo8jiPIosjKTIwkA6IhZIkWV5tA/
+        Lo8jiPIosjKTIwkA6IhZIkWV5tA/
+        Lo8jiPIosjKTIwkA6IhZIkWV5tA/
+        Lo8jiPIosjKTIwkA6IhZIkWV5tA/
+        Lo8jiPIosjKTIwkA6IhZIkWV5tA/
+        Lo8jiPIosjKTIwkA6IhZIkWV5tA/
+        Lo8jiPIosjKTIwkA6IhZIkWV5tA/
+        Lo8jiPIosjKTIwkA6IhZIkWV5tA/
+        Lo8jiPIosjKTIwkA6IhZIkWV5tA/
+        Lo8jiPIosjKTIwkA6IhZIkWV5tA/
+        Lo8jiPIosjKTIwkA6IhZIkWV5tA/
+        Lo8jiPIosjKTIwkA6IhZIkWV5tA/
+        Lo8jiPIosjKTIwkA6IhZIkWV5tA/
+        Lo8jiPIosjKTIwkA6IhZIkWV5tA/
+        Lo8jiPIosjKTIwkA6IhZIkWV5tA/
+        Lo8jiPIosjKTIwkA6IhZIkWV5tA/
+        Lo8jiPIosjKTIwkA6IhZIkWV5tA/
+        Lo8jiPIosjKTIwkA6IhZIkWV5tA/
+        Lo8jiPIosjKTIwkA6IhZIkWV5tA/
+        Lo8jiPIosjKTIwkA6IhZIkWV5tA/
+        Lo8jiPIosjKTIwkA6IhZIkWV5tA/
+        Lo8jiPIosjKTIwkA6IhZIkWV5tA/
+        Lo8jiPIosjKTIwkA6IhZIkWV5tA/
+        Lo8jiPIosjKTIwkA6IhZIkWV5tA/
+        Lo8jiPIosjKTIwkA6IhZIkWV5tA/
+        Lo8jiPIosjKTIwkA6IhZIkWV5tA/
+        Lo8jiPIosjKTIwkA6IhZIkWV5tA/
+        Lo8jiPIosjKTIwkA6IhZIkWV5tA/
+        Lo8jiPIosjKTIwkA6IhZIkWV5tA/
+        Lo8jiPIosjKTIwkA6IhZIkWV5tA/
+        Lo8jiPIosjKTIwkA6IhZIkWV5tA/
+        Lo8jiPIosjGRzuVzOM3PC3rXa5+z3+9ntdqv9fuzDl/
+        v9fr3f77+xd632Oe2Dol9m5s/
+        1en3thjgubcSxmJmlyKI8ZhoIBVJkURztA+MosjCQ7+d
+        0QyiUIoviaCAaR5GFiXRAKJAii+L4eUwboVCKLIqjgWg
+        cRRYm0gGhQIosiqPIAjmKLA2lI0KJFFkUR3+lYxxFFgb
+        Sf7I4kCJLIymyKJEii+IosjCOIgsDKbI4kCJLIymyKJE
+        ii+IosjCOIgsDKbI4kCJLIymyKJEii+IosjCOIgsDKbI
+        4kCJLIymyKJEii+IosjCOIgsDKbI4kCJLIymyKJEii+I
+        osjCOIgsDKbI4kCJLIymyKJEii+IosjCOIgsDKbI4kCJ
+        LIymyKJEii+IosjCOIgsDKbI4kCJLIymyKJEii+IosjC
+        OIgsDKbI4kCJLIymyKJEii+IosjCOIgsDKbI4kCJLIym
+        yKJEii+IosjCOIgsDKbI4kCJLIymyKJEii+IosjCOIgs
+        DKbI4kCJLIymyKJEii+IosjCOIgsDKbI4kCJLIymyKJE
+        ii+IosjCOIgsDKbI4kCJLIymyKJEii+IosjCOIgsDKbI
+        4kCJLIymyKJEii+IosjCOIgsDKbI4kCJLIymyKJEii+I
+        osjCOIgsDKbI4kCJLIymyKJEii+IosjCOIgsDKbI4kCJ
+        LIymyKJEii+IosjCOIgsDKbI4kCJLIymyKJEii+IosjC
+        OIgsDKbI4kCJLIymyKJEii+IosjCOIgsDKbI4kCJLIym
+        yKJEii+IosjCOIgsDKbI4kCJLIymyKJEii+IosjCOIgs
+        DKbI4kCJLIymyKJEii+IosjCOIgsDKbI4kCJLIymyKJE
+        ii+IosjCOIgsDKbI4kCJLIymyKJEii+IosjCOIgsDKbI
+        4kCJLIymyKJEii+IosjCOIgsDKbI4kCJLIymyKJEii+I
+        osjCOIgsDKbI4kCJLIymyKJEii+IosjCOIgsDKbI4kCJ
+        LIymyKJEii+IosjCOIgsDKbI4kCJLIymyKJEii+IosjC
+        OIgsDKbI4kCJLIymyKJEii+IosjCOIgsDKbI4kCJLIym
+        yKJEii+IosjCOIgsDKbI4kCJLIymyKJEii+IosjCOIgs
+        DKbI4kCJLIymyKJEii+IosjCOIgsDKbI4kCJLIymyKJE
+        ii+IosjCOIgsDKbI4kCJLIymyKJEii+IosjCOIgsDKbI
+        4kCJLIymyKJEii+IosjCOIgsDKbI4kCJLIymyKJEii+I
+        osjCOIgsDKbI4kCJLIymyKJEii+IosjCOIgsDKbI4kCJ
+        LIymyKJEii+IosjCOIgsDKbI4kCJLIymyKJEii+IosjC
+        OIgsDKbI4kCJLIymyKJEii+IosjCOIgsDKbI4kCJLIym
+        yKJEii+IosjCOIgsDKbI4kCJLIymyKJEii+IosjCOIgs
+        DKbI4kCJLIymyKJEii+IosjCOIgsDKbI4kCJLIymyKJE
+        ii+IosjCOIgsDKbI4kCJLIymyKJEii+IosjCOIgsDKbI
+        4kCJLIymyKJEii+IosjCOIgsDKbI4kCJLIymyKJEii+I
+        osjCOIgsDKbI4kCJLIymyKJEii+IosjCOIgsDKbI4kCJ
+        LIymyKJEii+IosjCOIgsDKbI4kCJLIymyKJEii+IosjC
+        OIgsDKbI4kCJLIymyKJEii+IosjCOIgsDKbI4kCJLIym
+        yKJEii+IosjCOIgsDKbI4kCJLIymyKJEii+IosjCOIgs
+        DKbI4kCJLIymyKJEii+IosjCOIgsDKbI4kCJLIymyKJE
+        ii+IosjCOIgsDKbI4kCJLIymyKJEii+IosjCOIgsDKbI
+        4kCJLIymyKJEii+IosjCOIgsDKbI4kCJLIymyKJEii+I
+        osjCOIgsDKbI4kCJLIymyKJEii+IosjCOIgsDKbI4kCJ
+        LIymyKJEii+IosjCOIgsDKbI4kCJLIymyKJEii+IosjC
+        OIgsDKbI4kCJLIymyKJEii+IosjCOIgsDKbI4kCJLIym
+        yKJEii+IosjCOIgsDKbI4kCJLIymyKJEii+IosjCOIgs
+        DKbI4kCJLIymyKJEii+IosjCOIgsDKbI4kCJLIymyKJE
+        ii+IosjCOIgsDKbI4kCJLIymyKJEii+IosjCOIgsDKbI
+        4kCJLIymyKJEii+IosjCOIgsDKbI4kCJLIymyKJEii+I
+        osjCOIgsDKbI4kCJLIymyKJEii+IosjCOIgsDKbI4kCJ
+        LIymyKJEii+IosjCOIgsDKbI4kCJLIymyKJEii+IosjC
+        OIgsDKbI4kCJLIymyKJEii+IosjCOIgsDKbI4kCJLIym
+        yKJEii+IosjCOIgsDKbI4kCJLIymyKJEii+IosjCOIgs
+        DKbI4kCJLIymyKJEii+IosjCOIgsDKbI4kCJLIymyKJE
+        ii+IosjCOIgsDKbI4kCJLIymyKJEii+IosjCOIgsDKbI
+        4kCJLIymyKJEii+IosjCOIgsDKbI4kCJLIymyKJEii+I
+        osjCOIgsDKbI4kCJLIymyKJEii+IosjCOIgsDKbI4kCJ
+        LIymyKJEii+IosjCOIgsDKbI4kCJLIymyKJEii+IosjC
+        OIgsDKbI4kCJLIymyKJEii+IosjCOIgsDKbI4kCJLIym
+        yKJEii+IosjCOIgsDKbI4kCJLIymyKJEii+IosjCOIgs
+        DKbI4kCJLIymyKJEii+IosjCOIgsDKbI4kCJLIymyKJE
+        ii+IosjCOIgsDKbI4kCJLIymyKJEii+IosjCOIgsDKbI
+        4kCJLIymyKJEii+IosjCOIgsDKbI4kCJLIymyKJEii+I
+        osjCOIgsDKbI4kCJLIymyKJEii+IosjCOIgsDKbI4kCJ
+        LIymyKJEii+IosjCOIgsDKbI4kGXzfD7PM3PinrbSB91
+        ut3k8Hiv9eu+zt9vtx+FwePNets4XtQ/
+        O/
+        f14PL50QxyXNuJYfL+kyLI8poFYIEWW5dE+LI+ZKbIwk
+        jZigRRZlkeRhXkUWRZIB8TyKLI4j24IRlJkYSAdEQuky
+        LI82oflUWRxHkUWRlJkYSAdEQukyLI82oflUWRxHkUWR
+        lJkYSAdEQukyLI82oflUWRxHkUWRlJkYSAdEQukyLI82
+        oflUWRxHkUWRlJkYSAdEQukyLI82oflUWRxHkUWRlJkY
+        SAdEQukyLI82oflUWRxHkUWRlJkYSAdEQukyLI82oflU
+        WRxHkUWRlJkYSAdEQukyLI82oflUWRxHkUWRlJkYSAdE
+        QukyLI82oflUWRxHkUWRlJkYSAdEQukyLI82oflUWRxH
+        kUWRlJkYSAdEQukyLI82oflUWRxHkUWRlJkYSAdEQuky
+        LI82oflUWRxHkUWRlJkYSAdEQukyLI82oflUWRxHkUWR
+        lJkYSAdEQukyLI82oflUWRxHkUWRlJkYSAdEQukyLI82
+        oflUWRxHkUWRlJkYSAdEQukyLI82oflUWRxHkUWRlJkY
+        SAdEQukyLI82oflUWRxHkUWRlJkYSAdEQukyLI82oflU
+        WRxHkUWRlJkYSAdEQukyLI82oflUWRxHkUWRlJkYSAdE
+        QukyLI82oflUWRxHkUWRlJkYSAdEQukyLI82oflUWRxH
+        kUWRlJkYSAdEQukyLI82oflUWRxHkUWRlJkYSAdEQuky
+        LI82oflUWRxHkUWRlJkYSAdEQukyLI82oflUWRxHkUWR
+        lJkYSAdEQukyLI82oflUWRxHkUWRlJkYSAdEQukyLI82
+        oflUWRxHkUWRlJkYSAdEQukyLI82oflUWRxHkUWRlJkY
+        SAdEQukyLI82oflUWRxHkUWRlJkYSAdEQukyLI82oflU
+        WRxHkUWRlJkYSAdEQukyLI82oflUWRxHkUWRlJkYSAdE
+        QukyLI82oflUWRxHkUWRlJkYSAdEQukyLI82oflUWRxH
+        kUWRlJkYSAdEQukyLI82oflUWRxHkUWRlJkYSAdEQuky
+        LI82oflUWRxHkUWRlJkYSAdEQukyLI82oflUWRxHkUWR
+        lJkYSAdEQukyLI82oflUWRxHkUWRlJkYSAdEQukyLI82
+        oflUWRxHkUWRlJkYSAdEQukyLI82oflUWRxHkUWRlJkY
+        SAdEQukyLI82oflUWRxHkUWRlJkYSAdEQukyLI82oflU
+        WRxHkUWRlJkYSAdEQukyLI82oflUWRxHkUWRlJkYSAdE
+        QukyLI82oflUWRxHkUWRlJkYSAdEQukyLI82oflUWRxH
+        kUWRlJkYSAdEQukyLI82oflUWRxHkUWRlJkYSAdEQuky
+        LI82oflUWRxHkUWRlJkYSAdEQukyLI82oflUWRxHkUWR
+        lJkYSAdEQukyLI82oflUWRxHkUWRlJkYSAdEQukyLI82
+        oflUWRxHkUWRlJkYSAdEQukyLI82oflUWRxHkUWRlJkY
+        SAdEQukyLI82oflUWRxHkUWRlJkYSAdEQukyLI82oflU
+        WRxHkUWRlJkYSAdEQukyLI82oflUWRxHkUWRlJkYSAdE
+        QukyLI82oflUWRxHkUWRlJkYSAdEQukyLI82oflUWRxH
+        kUWRlJkYSAdEQukyLI82oflUWRxHkUWRlJkYSAdEQuky
+        LI82oflUWRxHkUWRlJkYSAdEQukyLI82oflUWRxHkUWR
+        lJkYSAdEQukyLI82oflUWRxHkUWRlJkYSAdEQukyLI82
+        oflUWRxHkUWRlJkYSAdEQukyLI82oflUWRxHkUWRlJkY
+        SAdEQukyLI82oflUWRxHkUWRlJkYSAdEQukyLI82oflU
+        WRxHkUWRlJkYSAdEQukyLI82oflUWRxHkUWRlJkYSAdE
+        QukyLI82oflUWRxHkUWRlJkYSAdEQukyLI82oflUWRxH
+        kUWRlJkYSAdEQukyLI82oflUWRxHkUWRlJkYSAdEQuky
+        LI82oflUWRxHkUWRlJkYSAdEQukyLI82oflUWRxHkUWR
+        lJkYSAdEQukyLI82oflUWRxHkUWRlJkYSAdEQukyLI82
+        oflUWRxHkUWRlJkYSAdEQukyLI82oflUWRxHkUWRlJkY
+        SAdEQukyLI82oflUWRxHkUWRlJkYSAdEQukyLI82oflU
+        WRxHkUWRlJkYSAdEQukyLI82oflUWRxHkUWRlJkYSAdE
+        QukyLI82oflUWRxHkUWRlJkYSAdEQukyLI82oflUWRxH
+        kUWRlJkYSAdEQukyLI82oflUWRxHkUWRlJkYSAdEQuky
+        LI82oflUWRxHkUWRlJkYSAdEQukyLI82oflUWRxHkUWR
+        lJkYSAdEQukyLI82oflUWRxHkUWRlJkYSAdEQukyLI82
+        oflUWRxHkUWRlJkYSAdEQukyLI82oflUWRxHkUWRlJkY
+        SAdEQukyLI82oflUWRxHkUWRlJkYSAdEQukyLI82oflU
+        WRxHkUWRlJkYSAdEQukyLI82oflUWRxHkUWRlJkYSAdE
+        QukyLI82oflUWRxHkUWRlJkYSAdEQukyLI82oflUWRxH
+        kUWRlJkYSAdEQukyLI82oflUWRxHkUWRlJkYSAdEQuky
+        LI82oflUWRxHkUWRlJkYSAdEQukyLI82oflUWRxHkUWR
+        lJkYSAdEQukyLI82oflUWRxHkUWRlJkYSAdEQukyLI82
+        oflUWRxHkUWRlJkYSAdEQukyLI82oflUWRxHkUWRlJkY
+        SAdEQukyLI82oflUWRxHkUWRlJkYSAdEQukyLI82oflU
+        WRxHkUWRlJkYSAdEQukyLI82oflUWRxHkUWRlJkYSAdE
+        QukyLI82oflUWRxHkUWRrK5XC7nmTlh71rtc/
+        b7/
+        ex2u9V+P/
+        bhy+fn59+vr69f2LtW+5z2QdEvM/
+        Pner2+dkMclzbiWMzMUmRRHjMNhAIpsiiO9oFxFFkYyPdzuiEUSpFFcTQQjaPIwkQ6IBRIkUVx/
+        DymjVAoRRbF0UA0jiILE+mAUCBFFsVRZIEcRZaG0hGhRIosiqO/
+        0jGOIgsD6T9ZHEiRpZEUWZRIkUVxFFkYR5GFgRRZHEiRp
+        ZEUWZRIkUVxFFkYR5GFgRRZHEiRpZEUWZRIkUVxFFkYR5
+        GFgRRZHEiRpZEUWZRIkUVxFFkYR5GFgRRZHEiRpZEUWZR
+        IkUVxFFkYR5GFgRRZHEiRpZEUWZRIkUVxFFkYR5GFgRRZ
+        HEiRpZEUWZRIkUVxFFkYR5GFgRRZHEiRpZEUWZRIkUVxF
+        FkYR5GFgRRZHEiRpZEUWZRIkUVxFFkYR5GFgRRZHEiRpZ
+        EUWZRIkUVxFFkYR5GFgRRZHEiRpZEUWZRIkUVxFFkYR5G
+        FgRRZHEiRpZEUWZRIkUVxFFkYR5GFgRRZHEiRpZEUWZRI
+        kUVxFFkYR5GFgRRZHEiRpZEUWZRIkUVxFFkYR5GFgRRZH
+        EiRpZEUWZRIkUVxFFkYR5GFgRRZHEiRpZEUWZRIkUVxFF
+        kYR5GFgRRZHEiRpZEUWZRIkUVxFFkYR5GFgRRZHEiRpZE
+        UWZRIkUVxFFkYR5GFgRRZHEiRpZEUWZRIkUVxFFkYR5GF
+        gRRZHEiRpZEUWZRIkUVxFFkYR5GFgRRZHEiRpZEUWZRIk
+        UVxFFkYR5GFgRRZHEiRpZEUWZRIkUVxFFkYR5GFgRRZHE
+        iRpZEUWZRIkUVxFFkYR5GFgRRZHEiRpZEUWZRIkUVxFFk
+        YR5GFgRRZHEiRpZEUWZRIkUVxFFkYR5GFgRRZHEiRpZEU
+        WZRIkUVxFFkYR5GFgRRZHEiRpZEUWZRIkUVxFFkYR5GFg
+        RRZHEiRpZEUWZRIkUVxFFkYR5GFgRRZHEiRpZEUWZRIkU
+        VxFFkYR5GFgRRZHEiRpZEUWZRIkUVxFFkYR5GFgRRZHEi
+        RpZEUWZRIkUVxFFkYR5GFgRRZHEiRpZEUWZRIkUVxFFkY
+        R5GFgRRZHEiRpZEUWZRIkUVxFFkYR5GFgRRZHEiRpZEUW
+        ZRIkUVxFFkYR5GFgRRZHEiRpZEUWZRIkUVxFFkYR5GFgR
+        RZHEiRpZEUWZRIkUVxFFkYR5GFgRRZHEiRpZEUWZRIkUV
+        xFFkYR5GFgRRZHEiRpZEUWZRIkUVxFFkYR5GFgRRZHEiR
+        pZEUWZRIkUVxFFkYR5GFgRRZHEiRpZEUWZRIkUVxFFkYR
+        5GFgRRZHEiRpZEUWZRIkUVxFFkYR5GFgRRZHEiRpZEUWZ
+        RIkUVxFFkYR5GFgRRZHEiRpZEUWZRIkUVxFFkYR5GFgRR
+        ZHEiRpZEUWZRIkUVxFFkYR5GFgRRZHEiRpZEUWZRIkUVx
+        FFkYR5GFgRRZHEiRpZEUWZRIkUVxFFkYR5GFgRRZHEiRp
+        ZEUWZRIkUVxFFkYR5GFgRRZHEiRpZEUWZRIkUVxFFkYR5
+        GFgRRZHEiRpZEUWZRIkUVxFFkYR5GFgRRZHEiRpZEUWZR
+        IkUVxFFkYR5GFgRRZHEiRpZEUWZRIkUVxFFkYR5GFgRRZ
+        HEiRpZEUWZRIkUVxFFkYR5GFgRRZHEiRpZEUWZRIkUVxF
+        FkYR5GFgRRZHEiRpZEUWZRIkUVxFFkYR5GFgRRZHEiRpZ
+        EUWZRIkUVxFFkYR5GFgRRZHEiRpZEUWZRIkUVxFFkYR5G
+        FgRRZHEiRpZEUWZRIkUVxFFkYR5GFgRRZHEiRpZEUWZRI
+        kUVxFFkYR5GFgRRZHEiRpZEUWZRIkUVxFFkYR5GFgRRZH
+        EiRpZEUWZRIkUVxFFkYR5GFgRRZHEiRpZEUWZRIkUVxFF
+        kYR5GFgRRZHEiRpZEUWZRIkUVxFFkYR5GFgRRZHEiRpZE
+        UWZRIkUVxFFkYR5GFgRRZHEiRpZEUWZRIkUVxFFkYR5GF
+        gRRZHEiRpZEUWZRIkUVxFFkYR5GFgRRZHEiRpZEUWZRIk
+        UVxFFkYR5GFgRRZHEiRpZEUWZRIkUVxFFkYR5GFgRRZHE
+        iRpZEUWZRIkUVxFFkYR5GFgRRZHEiRpZEUWZRIkUVxFFk
+        YR5GFgRRZHEiRpZEUWZRIkUVxFFkYR5GFgRRZHEiRpZEU
+        WZRIkUVxFFkYR5GFgRRZHEiRpZEUWZRIkUVxFFkYR5GFg
+        RRZHEiRpZEUWZRIkUVxFFkYR5GFgRRZHEiRpZEUWZRIkU
+        VxFFkYR5GFgRRZHEiRpZEUWZRIkUVxFFkYR5GFgRRZHEi
+        RpZEUWZRIkUX10VFIAAABjElEQVRxFFkYR5GFgRRZHEiR
+        pZEUWZRIkUVxFFkYR5GFgRRZHEiRpZEUWZRIkUVxFFkYR
+        5GFgRRZHEiRpZEUWZRIkUVxFFkYR5GFgRRZHEiRpZEUWZ
+        RIkUVxFFkYR5GFgRRZHEiRpZEUWZRIkUVxFFkYR5GFgRR
+        ZHEiRpZEUWZRIkUVxFFkYR5GFgRRZHEiRpZEUWZRIkUVx
+        FFkYR5GFgRRZHEiRpZEUWZRIkUVxFFkYR5GFgRRZHEiRp
+        ZEUWZRIkUVxFFkYR5GFgRRZHEiRpZEUWZRIkUVxFFkYR5
+        GFgRRZHEiRpZEUWZRIkUVxFFkYR5GFgRRZHEiRpZEUWZR
+        IkUVxFFkYR5GFgRRZHEiRpZEUWZRIkUVxFFkYR5GFgRRZ
+        HEiRpZEUWZRIkUVxFFkYR5GFgRRZHEiRpZEUWZRIkUVxF
+        FkYR5GFgRRZHEiRpZEUWZRIkUVxFFkYR5GFgRRZHEiRp3
+        EUWZRIkUVxFFkYR5GFgRRZHEiRpZEUWZRIkUVxFFkYR5G
+        FgRRZHMjyD927Pykv3DlCAAAAAElFTkSuQmCC" alt=""><h2>Transparent</h2></button>
+        <button type="submit" onclick="whiteBG()" style="width:100px; height: 180px;">
+          White Background
+
+        </button>
+        <script>
+        function whiteBG(){
+          var canvas = document.getElementById("draw");
+          var ctx = canvas.getContext("2d");
+ ctx.beginPath(); // begin the drawing path
+ ctx.lineWidth = 999; // width of line
+ ctx.lineCap = "round"; // rounded end cap
+ ctx.strokeStyle = "#ffffff"; // hex color of line
+ ctx.moveTo(0, 0); // from position
+ ctx.lineTo(500, 0); // to position
+ ctx.stroke(); // draw it!
+ closeNew();
+}
+        </script>
+        <button type="submit" style="width: 130px; height: 180px;" id="fileSelect">
+          <img width="30px" src="data:image/png;base64,
+          iVBORw0KGgoAAAANSUhEUgAAAHgAAADlCAYAAACYnDNPAAAAAXNSR0IArs4c6QAADCdJREFUeF7tnXuMlFcZxs/
+          Z2ZnZ2euwW9jdCkq7QrnHFYsQWZIWTQhxk0qsNxJqYgMEoVpsxFStqaLR2AQDrqKYQGJKEzElsVpLlGpXoXVhrdi620KWS7stbLs3dtnb7Mwc8yFTdnEv33vm/
+          WbO+ebhT/
+          J+Z97z/
+          OYJsM8zgxQ59ksptVAIUSOl/
+          H0uXF3mwiVTd1RKVSaTye0yL2+BFGKzlLLH7/
+          fPKcDDo2pdz2Dip/
+          0jidF5M0N7pJS/
+          BGCfKKCUmjcymvz66UtDD7R1xoKbVs44LoR4SErZ4pMrTniNnHCwUiqYSIjPv9YxvP/
+          Jpp7ItZGk+Ozd0e7a2ZH9ReHANwHYcgWUUss7++OPH2vt/
+          8Thpt5QIE+K1TWFyR33VrwUCQYek1I6bvblL987WClVIYTY9q/
+          2oe/
+          ub+wSb3aPXgd5e1lQbKgtG/
+          34wqKngoG8LVLKYT8S9j3goVG1tr0ntu/
+          ZV/
+          oWHGvpH3ff2vcXxrfUlbfMmRF8Qkr5awC2TAGl1NxEUjxy8vzA1n3PdwYGYslxN4hGAqJ+Wan43N3RY47LpZTnLbvitOv61sFKKTkUS2y40BX/
+          1W9O90ZPXRqcUIz5lQVq44pox5LqcEMkHNg9rWKWDfgZ8LKrQ4lv/
+          +m1a/
+          UHT3SHJ+MSypdi7V3FauuaihP5AfkNKeUJyxhOua4vASulSoUQm195a/
+          jHB/
+          7eJdrejU0pwpwZQfHp5dGhunmFBwvyA18GYMMVGBpVa97pG33i2Vf7a5/
+          599V8N+t+5AOF8W33VJypLM7/
+          oZTyt26esWHGdw5WSs0WQjzcdHFw597nO0XPYMIVh4qifHHfh0qdfzo5IYTzc+rLrh40fMh3gIfjqv78u8MHnn75auXJton/
+          YjUZk0XVBclNq6JvLKiK7A0F5B7D2blaz1eAnShwIJZ89Hjrtc/
+          84m9dIVcKjBmKhPLEukUl4sHV5Y1CiJ1SymbqGabN+wawUqowKcQXW94e3nvoxe5A6+URLa3nVoTE/
+          cvL+lfdWXygICi/
+          pnWIQQ/
+          5CfDKK/
+          3xHzz3av/
+          HjjT3kt07lslH7yyKf+WeiuaySGC37cUAXwBWSlUJIXY0Xxp6tOGFTtHRF0/
+          LQ7NK8sWnaqPJ+mUlT9teDPAFYCfIv9Q18vPfnemb+5ez19KCm3p46fsiiS+tLj9nezHAesCpIL/
+          x3MADDS90BUcTigVwSThPrF9aKmwvBlgN+NYg/
+          0w7b+JXMzNkfTHAdsDjgnwW6445xA/
+          FAGsBTxbkc0O2vRhgLWAnyH+rJ7bvDxME+dyQbS4GWAl4uiCfG7DNxQDrAI8L8pt7o6cu0n7erAvfKQZ8YUW0Y3F1uKHIomKAjYBdBfm6ICd7ztZigFWAqUE+N2QbiwFWAdYJ8rkh21YMsAbwjSB/
+          Z9PFwYcpQT43YNuKAdYATgX5R1/
+          uqzzRNsDNjXSeTcUAKwCnG+ST6LkYtqkYYDxgriDfBTfSiC3FABsAswX5JIIuhm0oBhgNmDvId8GMNPK/
+          YkBZsn5ZqbHFAKMBexHkkwi6GDa9GGAsYK+CfBfMSCOmFwOMBOx1kE8i6GLY5GKAqYA9DfJdMCONmFwMMA5wpoJ8EkEXw6YWA4wDnMkg3wU30oiJxQCjACul7kgkko+cvDC0ZaJP5JPUzsKwicUAYwBnK8jnfh+YVgwwCXBWgnxuwNeLAQuK1dY6M74xwAjA2Q7yuSGbVAwwArAJQT43ZFOKAVkHbEqQzw3YlGJA1gGbFORzQzahGJBVwKYF+dyATSgGZA2wqUE+N+RsFwOyCdjYIJ8bcjaLAVkBbHqQzw04m8WArAC+HuR33/
+          hE/
+          us8n8jnhsJ9XraKARkHfCPI39V4bmAT5yfyuYFwn5etYkBGAdsW5HNDzkYxINOArQryuQFnoxiQMcC2BvnckDNdDMgY4FSQ73y1/
+          nO3fLU+t4imn5fJYkBGANse5HO/
+          YTJZDPAcsF+CfG7ImSoGZAKwL4J8bsCZKgZ4CthvQT435JvFgOKD4YDYLqXk+Zq+MYt6CtiPQT43ZK+LAZ4B9muQzw3Y62KAZ4D9HORzQ/
+          ayGOAJYL8H+dyAvSwGsAPOlSCfG7JXxQAvAOdMkM8N2YtiACvgXAvyuQE7xYANtWXJTzJ+YwAr4FwM8rkhcxcD2ADnapDPDZi7GMACONeDfG7InMUALsA5HeRzA3aKAXU1hcnt91a8FAkGHpNSHtd9jbQBI8jXlX7q524WA0qeCgbEVinlkM4rpQ0YQb6O7O6e4SgGpAUYQb47ULpTHMUAbcAI8nWx0Z5LtxiQDmAE+TRWWtPpFgO0ACPI12Kl/
+          VA6xQAtwAjytVlpP6hbDCADRpCvzSitB3WLAWTACPLT4pTWwzrFABJgBPlp8Un7YZ1igGvA44P8nkDrZd7/
+          yjXt2+fIAdRiAAUwgnxD3kSUYoArwAjyDSF7Y41UMWD90pKjASk3Sym7J9vQFWAE+WYBdrZxWwyYFjCCfPPgOhuVFOSJ9UtKxaaVM5wo8SEpZctEm04JGEG+mXBTW7kpBkwHGEG+wYzdFAMmBYwg32CyY1abrhgwKWAnyG/
+          vie37Iz6RbzzpqYoBEwJGkG8803ELTlUM+D/
+          ACPLtgpva1ikGbFwR7VhSHW6IhAO7U78/
+          EWAE+RYynqwYMA4wgnwLyY5ZeaJiwDjACPLtBuxsf2sx4D3ACPLth+vc4JZiwJb3ACPI9wdg5xZjiwHXASPI9w9c5yZjiwEyFeT3DCT2XOyKJU2/
+          anEoL+/
+          0G4PBw0290wYl3HdZWBUWD9bdFh8YScS5z/
+          bivNKCwKADeLEQ4j4vXsCjM+c8+Y+ejYdP9RZ7dP6kxzqAd62r/
+          OvM4sCfM/
+          3auq+XcRfoLpp6Tim16tCL3UePNF+tTPcs6vMO4B1rZ31/
+          bnnwW9RnszUPwATlAZgglu4oHExTDg4m6AUHE8TSHYWDacrBwQS94GCCWLqjcDBNOTiYoBccTBBLdxQOpikHBxP0goMJYumOwsE05eBggl5wMEEs3VE4mKYcHEzQCw4miKU7CgfTlIODCXrBwQSxdEfhYJpycDBBLziYIJbuKBxMUw4OJugFBxPE0h2Fg2nKwcEEveBggli6o3AwTTk4mKAXHEwQS3cUDqYpBwcT9IKDCWLpjsLBNOXgYIJecDBBLN1ROJimHBxM0AsOJoilOwoH05SDgwl6wcEEsXRH4WCacnAwQS84mCCW7igcTFMODiboBQcTxNIdhYNpysHBBL3gYIJYuqNwME05OJigFxxMEEt3FA6mKQcHE/
+          SCgwli6Y7CwTTl4GCCXnAwQSzdUTiYphwcTNALDiaIpTsKB9OUg4MJesHBBLF0R+FgmnJwMEEvOJgglu4oHExTDg4m6AUHE8TSHYWDacrBwQS94GCCWLqjcDBNOTiYoBccTBBLdxQOpikHBxP0goMJYumOwsE05eBggl5wMEEs3VE4mKYcHEzQCw4miKU7CgfTlIODCXrBwQSxdEfhYJpycDBBLziYIJbuKBxMUw4OJugFBxPE0h2Fg2nKwcEEveBggli6o3AwTTk4mKAXHEwQS3cUDqYpBwcT9IKDCWLpjsLBNOXgYIJecDBBLN1ROJimHBxM0AsOJoilOwoH05SDgwl6wcEEsXRH4WCacnAwQS84mCCW7igcTFMODiboBQcTxNIddRx8oSt2KB5XMd0zdJ+LhGThSCLv0AdnBr+ne0amn7POwZkWyPbXA2DbCU6zPwADsM8V8Pn14GAA9rkCPr8eHAzANxVQSs32uR7WXU9K2T7V0iQHX+4d+dE/
+          34yFrVPBpwt/
+          eE5opDoa3sUGuO2d4dafNXbDxYa8YbatKW+vmVWwkA3w2SvD//
+          nqkbcXGXK/
+          nF/
+          jJ/
+          ff3jK/
+          qmAxAPv0rQDAPgWbuhYAA7Ag/
+          S0afwab9Y6Bg83iwb4NALNLataBAGwWD/
+          ZtAJhdUrMOBGCzeLBvA8Dskpp1IACbxYN9GwBml9SsAwHYLB7s2wAwu6RmHQjAZvFg3waA2SU160AANosH+zYAzC6pWQcCsFk82LcBYHZJzToQgM3iwb4NALNLataBAGwWD/
+          ZtAJhdUrMOBGCzeLBvA8Dskpp1IACbxYN9GwBml9SsAwHYLB7s27ADvtA58vp3nrkyn31THKilwOP1VWfvuC1811QP/
+          xd8jCvoPFKlpwAAAABJRU5ErkJggg==" alt=""><h2>Upload image</h2>
+          <input type="file" id="fileElem" accept="image/png" style="display: none;">
+          <script>const fileSelect = document.getElementById("fileSelect");
+            fileElem = document.getElementById("fileElem");
+          
+          fileSelect.addEventListener("click", function (e) {
+            if (fileElem) {
+              fileElem.click();
+              fileElem.addEventListener('change', handleFiles);
+              function handleFiles(e) {
+                var cnvs = document.getElementById('draw');
+    var ctx = cnvs.getContext('2d');
+    var img = new Image;
+    img.src = URL.createObjectURL(e.target.files[0]);
+    img.onload = function() {
+        ctx.drawImage(img, 0,0,cnvs.width, cnvs.height);
+        closeNew();
+    }
+}
+            }
+          }, false);
+          </script>
+        </button>
+        <button type="submit" style="width: 130px; height: 180px;" id="fileSelect">
+          <img width="30px" src="data:image/png;base64,
+          iVBORw0KGgoAAAANSUhEUgAAAHgAAADlCAYAAACYnDNPAAAAAXNSR0IArs4c6QAADCdJREFUeF7tnXuMlFcZxs/
+          Z2ZnZ2euwW9jdCkq7QrnHFYsQWZIWTQhxk0qsNxJqYgMEoVpsxFStqaLR2AQDrqKYQGJKEzElsVpLlGpXoXVhrdi620KWS7stbLs3dtnb7Mwc8yFTdnEv33vm/
+          WbO+ebhT/
+          J+Z97z/
+          OYJsM8zgxQ59ksptVAIUSOl/
+          H0uXF3mwiVTd1RKVSaTye0yL2+BFGKzlLLH7/
+          fPKcDDo2pdz2Dip/
+          0jidF5M0N7pJS/
+          BGCfKKCUmjcymvz66UtDD7R1xoKbVs44LoR4SErZ4pMrTniNnHCwUiqYSIjPv9YxvP/
+          Jpp7ItZGk+Ozd0e7a2ZH9ReHANwHYcgWUUss7++OPH2vt/
+          8Thpt5QIE+K1TWFyR33VrwUCQYek1I6bvblL987WClVIYTY9q/
+          2oe/
+          ub+wSb3aPXgd5e1lQbKgtG/
+          34wqKngoG8LVLKYT8S9j3goVG1tr0ntu/
+          ZV/
+          oWHGvpH3ff2vcXxrfUlbfMmRF8Qkr5awC2TAGl1NxEUjxy8vzA1n3PdwYGYslxN4hGAqJ+Wan43N3RY47LpZTnLbvitOv61sFKKTkUS2y40BX/
+          1W9O90ZPXRqcUIz5lQVq44pox5LqcEMkHNg9rWKWDfgZ8LKrQ4lv/
+          +m1a/
+          UHT3SHJ+MSypdi7V3FauuaihP5AfkNKeUJyxhOua4vASulSoUQm195a/
+          jHB/
+          7eJdrejU0pwpwZQfHp5dGhunmFBwvyA18GYMMVGBpVa97pG33i2Vf7a5/
+          599V8N+t+5AOF8W33VJypLM7/
+          oZTyt26esWHGdw5WSs0WQjzcdHFw597nO0XPYMIVh4qifHHfh0qdfzo5IYTzc+rLrh40fMh3gIfjqv78u8MHnn75auXJton/
+          YjUZk0XVBclNq6JvLKiK7A0F5B7D2blaz1eAnShwIJZ89Hjrtc/
+          84m9dIVcKjBmKhPLEukUl4sHV5Y1CiJ1SymbqGabN+wawUqowKcQXW94e3nvoxe5A6+URLa3nVoTE/
+          cvL+lfdWXygICi/
+          pnWIQQ/
+          5CfDKK/
+          3xHzz3av/
+          HjjT3kt07lslH7yyKf+WeiuaySGC37cUAXwBWSlUJIXY0Xxp6tOGFTtHRF0/
+          LQ7NK8sWnaqPJ+mUlT9teDPAFYCfIv9Q18vPfnemb+5ez19KCm3p46fsiiS+tLj9nezHAesCpIL/
+          x3MADDS90BUcTigVwSThPrF9aKmwvBlgN+NYg/
+          0w7b+JXMzNkfTHAdsDjgnwW6445xA/
+          FAGsBTxbkc0O2vRhgLWAnyH+rJ7bvDxME+dyQbS4GWAl4uiCfG7DNxQDrAI8L8pt7o6cu0n7erAvfKQZ8YUW0Y3F1uKHIomKAjYBdBfm6ICd7ztZigFWAqUE+N2QbiwFWAdYJ8rkh21YMsAbwjSB/
+          Z9PFwYcpQT43YNuKAdYATgX5R1/
+          uqzzRNsDNjXSeTcUAKwCnG+ST6LkYtqkYYDxgriDfBTfSiC3FABsAswX5JIIuhm0oBhgNmDvId8GMNPK/
+          YkBZsn5ZqbHFAKMBexHkkwi6GDa9GGAsYK+CfBfMSCOmFwOMBOx1kE8i6GLY5GKAqYA9DfJdMCONmFwMMA5wpoJ8EkEXw6YWA4wDnMkg3wU30oiJxQCjACul7kgkko+cvDC0ZaJP5JPUzsKwicUAYwBnK8jnfh+YVgwwCXBWgnxuwNeLAQuK1dY6M74xwAjA2Q7yuSGbVAwwArAJQT43ZFOKAVkHbEqQzw3YlGJA1gGbFORzQzahGJBVwKYF+dyATSgGZA2wqUE+N+RsFwOyCdjYIJ8bcjaLAVkBbHqQzw04m8WArAC+HuR33/
+          hE/
+          us8n8jnhsJ9XraKARkHfCPI39V4bmAT5yfyuYFwn5etYkBGAdsW5HNDzkYxINOArQryuQFnoxiQMcC2BvnckDNdDMgY4FSQ73y1/
+          nO3fLU+t4imn5fJYkBGANse5HO/
+          YTJZDPAcsF+CfG7ImSoGZAKwL4J8bsCZKgZ4CthvQT435JvFgOKD4YDYLqXk+Zq+MYt6CtiPQT43ZK+LAZ4B9muQzw3Y62KAZ4D9HORzQ/
+          ayGOAJYL8H+dyAvSwGsAPOlSCfG7JXxQAvAOdMkM8N2YtiACvgXAvyuQE7xYANtWXJTzJ+YwAr4FwM8rkhcxcD2ADnapDPDZi7GMACONeDfG7InMUALsA5HeRzA3aKAXU1hcnt91a8FAkGHpNSHtd9jbQBI8jXlX7q524WA0qeCgbEVinlkM4rpQ0YQb6O7O6e4SgGpAUYQb47ULpTHMUAbcAI8nWx0Z5LtxiQDmAE+TRWWtPpFgO0ACPI12Kl/
+          VA6xQAtwAjytVlpP6hbDCADRpCvzSitB3WLAWTACPLT4pTWwzrFABJgBPlp8Un7YZ1igGvA44P8nkDrZd7/
+          yjXt2+fIAdRiAAUwgnxD3kSUYoArwAjyDSF7Y41UMWD90pKjASk3Sym7J9vQFWAE+WYBdrZxWwyYFjCCfPPgOhuVFOSJ9UtKxaaVM5wo8SEpZctEm04JGEG+mXBTW7kpBkwHGEG+wYzdFAMmBYwg32CyY1abrhgwKWAnyG/
+          vie37Iz6RbzzpqYoBEwJGkG8803ELTlUM+D/
+          ACPLtgpva1ikGbFwR7VhSHW6IhAO7U78/
+          EWAE+RYynqwYMA4wgnwLyY5ZeaJiwDjACPLtBuxsf2sx4D3ACPLth+vc4JZiwJb3ACPI9wdg5xZjiwHXASPI9w9c5yZjiwEyFeT3DCT2XOyKJU2/
+          anEoL+/
+          0G4PBw0290wYl3HdZWBUWD9bdFh8YScS5z/
+          bivNKCwKADeLEQ4j4vXsCjM+c8+Y+ejYdP9RZ7dP6kxzqAd62r/
+          OvM4sCfM/
+          3auq+XcRfoLpp6Tim16tCL3UePNF+tTPcs6vMO4B1rZ31/
+          bnnwW9RnszUPwATlAZgglu4oHExTDg4m6AUHE8TSHYWDacrBwQS94GCCWLqjcDBNOTiYoBccTBBLdxQOpikHBxP0goMJYumOwsE05eBggl5wMEEs3VE4mKYcHEzQCw4miKU7CgfTlIODCXrBwQSxdEfhYJpycDBBLziYIJbuKBxMUw4OJugFBxPE0h2Fg2nKwcEEveBggli6o3AwTTk4mKAXHEwQS3cUDqYpBwcT9IKDCWLpjsLBNOXgYIJecDBBLN1ROJimHBxM0AsOJoilOwoH05SDgwl6wcEEsXRH4WCacnAwQS84mCCW7igcTFMODiboBQcTxNIdhYNpysHBBL3gYIJYuqNwME05OJigFxxMEEt3FA6mKQcHE/
+          SCgwli6Y7CwTTl4GCCXnAwQSzdUTiYphwcTNALDiaIpTsKB9OUg4MJesHBBLF0R+FgmnJwMEEvOJgglu4oHExTDg4m6AUHE8TSHYWDacrBwQS94GCCWLqjcDBNOTiYoBccTBBLdxQOpikHBxP0goMJYumOwsE05eBggl5wMEEs3VE4mKYcHEzQCw4miKU7CgfTlIODCXrBwQSxdEfhYJpycDBBLziYIJbuKBxMUw4OJugFBxPE0h2Fg2nKwcEEveBggli6o3AwTTk4mKAXHEwQS3cUDqYpBwcT9IKDCWLpjsLBNOXgYIJecDBBLN1ROJimHBxM0AsOJoilOwoH05SDgwl6wcEEsXRH4WCacnAwQS84mCCW7igcTFMODiboBQcTxNIddRx8oSt2KB5XMd0zdJ+LhGThSCLv0AdnBr+ne0amn7POwZkWyPbXA2DbCU6zPwADsM8V8Pn14GAA9rkCPr8eHAzANxVQSs32uR7WXU9K2T7V0iQHX+4d+dE/
+          34yFrVPBpwt/
+          eE5opDoa3sUGuO2d4dafNXbDxYa8YbatKW+vmVWwkA3w2SvD//
+          nqkbcXGXK/
+          nF/
+          jJ/
+          ff3jK/
+          qmAxAPv0rQDAPgWbuhYAA7Ag/
+          S0afwab9Y6Bg83iwb4NALNLataBAGwWD/
+          ZtAJhdUrMOBGCzeLBvA8Dskpp1IACbxYN9GwBml9SsAwHYLB7s2wAwu6RmHQjAZvFg3waA2SU160AANosH+zYAzC6pWQcCsFk82LcBYHZJzToQgM3iwb4NALNLataBAGwWD/
+          ZtAJhdUrMOBGCzeLBvA8Dskpp1IACbxYN9GwBml9SsAwHYLB7s27ADvtA58vp3nrkyn31THKilwOP1VWfvuC1811QP/
+          xd8jCvoPFKlpwAAAABJRU5ErkJggg==" alt=""><h2>Upload from your Browser</h2>
+          <script>
+            function localUpload(){
+              localStorage.getItem()
+        ctx.drawImage(img, 0,0,cnvs.width, cnvs.height);
+      }
+
+          </script>
+        </button>
       </div>
-      <canvas id="colorCanvas" class="color-canvas" width="auto" height="160" style="margin-left: 0px;"></canvas>
-      
-      <div id="color-preview-html"><p id="rgb-values"></p></div>
-    </div>
-    <div id="canvas-style"><canvas id="draw"></canvas></div>
-    </div>
-    <div id="note">
-      <p>Touch support is hard, so make me an .js file that has touch controls</p>
-    </div>
-    <script>
-    // set canvas id to variable
-var canvas = document.getElementById("draw");
+</script></div>
+            </div></div></div>
 
-var ctx = canvas.getContext("2d");
 
-function openColorpicker() {
-  var x = document.getElementById("colour-window");
+
+
+            <!-- Navigation -->
+    <div id="nav" style="z-index: -9999999999; margin-top: -7.6px; text-align: left; height: 30px; margin-left: -7.6px; margin-right: -7.6px;">
+<button type="submit" style="margin-top: 0px;" onclick="openIcon()" id="dropdown-button">        <?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="15px" height="16px" class="ico" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="202" height="222" viewBox="0 0 202 222" xml:space="preserve">
+<defs>
+</defs>
+<g transform="matrix(1 0 0 1 119.59 82.1)"  >
+<path style="stroke: rgb(0,0,0); stroke-opacity: 0; stroke-width: 2; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(74,147,222); fill-rule: nonzero; opacity: 1;"  transform=" translate(-303.59, -197.1)" d="M 222 247 L 353.6605483810545 115.33945161894547 L 385.17173177712124 146.8506350150122 L 253.15497117995582 278.86739561217763 L 222 247" stroke-linecap="round" />
+</g>
+<g transform="matrix(-0.71 0 0 0.71 29.11 172.18)"  >
+<circle style="stroke: rgb(0,0,0); stroke-opacity: 0; stroke-width: 2; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(74,147,222); fill-rule: nonzero; opacity: 1;"  cx="0" cy="0" r="40" />
+</g>
+<g transform="
+matrix(-0.52 -0.14 0.14 -0.52 21.27 199.32)
+"  >
+<polygon style="
+stroke: rgb(0,0,0); 
+stroke-opacity: 0; 
+stroke-width: 2; 
+stroke-dasharray: none; 
+stroke-linecap: butt; 
+stroke-dashoffset: 0; 
+stroke-linejoin: miter; 
+stroke-miterlimit: 4; 
+fill: rgb(74,147,222); 
+fill-rule: nonzero; 
+opacity: 1;
+"  
+points="0,-42.5 50,42.5 -50,42.5 " />
+</g>
+<g transform="
+matrix(1 0 0 1 -618 -183)
+"  >
+<line style="
+ stroke: rgb(0,0,0); stroke-width: 2;
+ stroke-dasharray: none;
+ stroke-linecap: butt; 
+ stroke-dashoffset: 0; 
+ stroke-linejoin: miter; 
+ stroke-miterlimit: 4; 
+ fill: rgb(0,0,0); 
+ fill-rule: nonzero; 
+ opacity: 1;
+ " 
+ vector-effect="non-scaling-stroke"  x1="0" y1="0" x2="0" y2="0" />
+</g>
+</svg>
+</button>
+<div id="dropdown" style="margin-top:-10px; margin-left:2px;"><button type="submit" onclick="saveImage()" class="dropdown-action">Save As</button>
+  <button type="submit" onclick="localSave()" class="dropdown-action">Save to Browser</button>
+  <button type="submit" class="dropdown-action" onclick="openAbout()">About Madi Paint</button>
+</div>
+<button type="submit" onclick="saveImage()"  id="dropdown-button">
+  <img src="data:image/png;base64,
+  iVBORw0KGgoAAAANSUhEUgAAAHgAAADkCAYAAABTwODqAAAAAXNSR0IArs4c6QAADKdJREFUeF7tnX2MVFcZxs/
+  ZuzOzs58DW1iooLQI5TuuCEIEkoomhHST2lirklATGyAI1damNK0fqaLR2AQDolhMIDGlSTElsRVLFLToUgXWitSlhfDVbgu0uzvLLvs1OzPH3OVCh3V39rxn7tx7zr3P/
+  rvvuee9v2eembvzvHsvZ4b9CCEWn29L7U6nRcrr1uNRXt6fKdn98XGRH3q9t+p+XHWhX+tsgXe/
+  1r5vb9PVOq97mDkhxjYuH/
+  +jKWMj3/
+  F6b9X9IDCBHAQmwFIthYNp5OBgAi84mABLtRQOppGDgwm84GACLNVSOJhGDg4m8IKDCbBUS+FgGjk4mMALDibAUi2Fg2nk4GACLziYAEu1FA6mkYODCbzgYAIs1VI4mEYODibwgoMJsFRL4WAaOTiYwAsOJsBSLYWDaeTgYAIvOJgAS7UUDqaRg4MJvOBgAizVUjiYRg4OJvCCgwmwVEvhYBo5OJjACw4mwFIthYNp5OBgAi84mABLtRQOppGDgwm84GACLNVSOJhGDg4m8IKDCbBUS+FgGjk4mMALDibAUi2Fg2nk4GACLziYAEu1FA6mkYODCbzgYAIs1VI4mEYODibwgoMJsFRL4WAaOTiYwAsOJsBSLYWDaeTgYAIvOJgAS7UUDqaRg4MJvOBgAizVUjiYRg4OJvCCgwmwVEvhYBo5OJjACw4mwFIthYNp5OBgAi84mABLtRQOppGDgwm84GACLNVSOJhGDg4m8IKDCbBUS+FgGjk4mMALDibAUi2Fg2nk4GACLziYAEu1FA6mkYODCbzgYAIs1VI4mEYODibwgoMJsFRL4WAaOTiYwAsOJsBSLYWDaeTgYAIvOJgAS7UUDqaRg4MJvOBgAizVUjiYRg4OJvCCgwmwVEvhYBo5OJjACw4mwFIthYNp5OBgAi84mABLtRQOppGDgwm84GACLNVSOJhGDg4m8IKDCbBUS+FgGjk4mMALDibAUi2Fg2nk4GACLyMdLISYzRi7l3CefpdOfu6fyVV7jnVUet2ILfCmFXV/
+  HVdp/
+  dnrvVX340KI8ixjX0t2Z7ZcaEtlVQ/
+  k1brKaEnJ8bd7InuOdnj+7mML/
+  NDS29Ld/
+  Zm0V+dbyD7VZVbPICQhxMzuVPbJg6eufenXf2uLFnJQrPWfQDxawlbMqmIPLRl7+KYL+tKi4dwHfTv3vd5Z13i22/
+  8u0YEygVkTy7KrFyfenjEhvvWmwEKISYyxR49e6Hlk66FWluzJKG+Ahf4RqK0oZfd+oprdV1/
+  zMmNs7S2fY70DYtn7nQPP7H+jq/
+  6l/
+  1wt9a9N7KxK4FMfK0+vv7v2RF1l6U8457+7RWAhRDVjbM3Jd/
+  t+tvPvbezsBynVfbDOBwKTx0TYF+cnepdOq9wVs9gGzrn4vytRIcS8q72Z7/
+  7pzWsNuxrbYz70iS0VCERLOVs+o1KsW1rbWGrxJzjnjfZhhhOY96Yy951vS//
+  mhaaOxLELPQrbYYnXBKbXlYlVCxNX5kyMbY/
+  HrM039h/
+  2b0khxB2ZTPaxI+d712471Gp16//
+  nsdc8tdovEbdYw7xq9uUFiQOMsfWc83N5BbZ/
+  2TsglrckU9v+eLJzxivNXZ5/
+  qaAVQc2bqf9oeXrt0rHNk8dEnuGc/
+  za33RGFE0LU2q+Gf7f0/
+  mDH4Tb2TvuA5qcZzvZur4nYfxINfG5m1fMRi63jnPdKCWwXCSHmt3alnz5wquvze4524BsuzV5DVglnS6eWZzd8tvYf8Yj1Pc75waEt5n3rFUJEMhn2lTev9O147mgyfqKlT7NTDHc7U8dF2QMLEu31k+I7KmLWU8PRGPWzVQgxrX8gu+nwme7V219tiwxkRLipanL2VWUlbOWcarZ60RjbtQ9zzpuVBLYX9Q2IFRfb+3/
+  1+xOdU/
+  7y1jVNTjHcbcz9SDzz9SVjz0wbF93COX92JBqjOtj5LJ7AGNvYdLH3ye2vtrIrnUakZYF9BYyvKrUvrLIr51btszhfwzlvL0hgR+RFl7vSP37lja7P7G3CBZefr55P31mR/
+  ubdtU01cWsz59wOFUb8kXKwI/
+  DgYEDze31bd7+WtE5dwgWXHyJPqY2y++fXdC2+s3JnWYR/
+  e7QepAV2RMZgwGhEi/
+  j73CDfjnY5502jbUcSePCCC4MBozEt2u9zg/
+  yoxbfIbEQWGIMBMljdrxkS5NsXVpdkdiELbB8UgwEyaN2tGRrkyx5dSWAMBsjidaduuCBf9shKAjsXXBgMkKVcQN1IQb7sIQsRGIMBspQLqLOD/
+  K8uTFyZPTG2vSInyJc9pLLAjosxGCBLWqEuX5Ave7iCBHYuuJa/m0xt24/BAFnm0nX5gnzZgxQsMAYDZFHT6kYL8mWPVrDAzls1BgNkiUvUyQT5EocZLHFLYAwGyBKXqJMJ8iUO457AjosxGCBLPU9dVayErZw7epAvu5UrDr6xGQYDZLGPXCcb5Mvu5KrAQggMBsiSH6buRpB/
+  z7zqFzlj9vfNyQIO5+5b9I1GhBAYDFBUhRLky27hqoOdz+KcwYB269SlftleQl1HDfJlYbkusCMyBgNkFWCMqQT5socvisD25hgMkJWAMZUgX/
+  boRRMYgwFyEqgG+XJHd+mLjpE2w2DA6DKoBvmjH/
+  l6RdEc7HwW444BeZQoJMjXQmBHZAwGDKNGoUG+TgJjMGAYNQoN8rUR2HExBgNyFHEjyNdKYLsZ+44BGAy4LosbQb52AmMw4LokHwb5Fc9HrJK1nPOi/
+  g9QUa+ih77Kwn7HADvIXzK1PLsxz3/
+  kyzpTts5rgUM9GOBmkK+lwM4FVygHA9wO8rUV2G4sjIMBbgf5WgsctsEAO8j/
+  Qn1NtsHFIF9rgZ236tAMBhQjyDdB4FAMBhQryNdeYMfFgR4MKGaQb4TAgxdcAb5jQDGDfGMEDupgQLGDfGMEdr6nDtyjBIod5BslcNDuGPBhkF++q6zU+oasGMWo8/
+  SrynwnEJRHCXgV5Mu+GHQSOBCDAV4F+cYJ7PzZZPRggJdBvpECOxdcg4MBfzjZOeOAYY8S8DLIN1ZgUwcDvA7yjRXYeas26o4BfgT5pgts1GCAH0G+0QLnDAY8fvhM94M6P0rAryDfeIFvDga0OY8SOK3nowT8CvIDIbDugwF+BvmBEFj3wQA/
+  g/
+  wgCazlYIDfQX5gBNZxMECHID9QAus2GKBDkB84gXUZDNAlyA+cwLoMBugS5AdSYL8HA3QK8gMpsHPB5csdAwaD/
+  LsqxbpltY2lFn+Cc94oC9nPOm0Cf1kIQghfBgN0C/
+  JleRknsOPiKZkse+zIue512w61Wt2prOz5KtXpGOTLnoiRAns9GKBjkB94gb0aDNA1yA+8wF4MBugc5IdF4KIOBugc5IdC4GIOBuge5IdG4GINBuge5IdKYLcHA64H+Ylsw7wq126tLyuI23XG/
+  pk0FISbjxIwIciXfSEESWBXBgNMCfJDJ7AbgwEmBfmhFDh3MODF16/
+  WHTnbI8thsM6kIF/
+  2xALzFn3jhJ3BgEeOXuh5dOuhVpbsyUixMC3IlzqpYt/
+  xXbYJt+tUHiVgWpAvyyxwDnY+i0mPEjAxyA+1wI7IUoMBpgb5EDh3MOB4R+LYxeEvuOwgf9XCxJU5E2Pb4zFrsyw4U+oC+Radc8GVdzDA5CBf9gUWaIFtCPajBFqSqW37h7ljgMlBPgR2CIw0GGB6kA+BcwgMfZRAEIJ8CHyrwLcMBlzrz7IHFiTa6yfFd1TErKdkYZlYF/
+  jP4JwLLvtRAo8fv9j74NnWVGT1ojEHGWMPc86bTRROtufQCDz4PfWAWJHsyfyiqz8zMG1cdAvn/
+  FlZUKbWhUpgIURdNpvdwEtKZnDG1nDOk6YKJ9t3qAR2vuGayRibyjl/
+  WRaSyXWhE9hksVR6h8Aq1AxaA4ENEkulVQisQs2gNRDYILFUWoXAKtQMWkMS2Jl3Muj0gt8q57wl31mSBL7U0f/
+  Tf72TigUfmxln+MnJ0f6Jidgm1wQ++37fqV8ebp9kxukHv8v1y8a2TB1fZn9xM+IPycGnL/
+  f991t735sVfHRmnOHP77+9efqEstkQ2Ay9yF1CYDIysxZAYLP0IncLgcnIzFoAgc3Si9wtBCYjM2sBBDZLL3K3EJiMzKwFENgsvcjdQmAyMrMWQGCz9CJ3C4HJyMxaAIHN0ovcLQQmIzNrAQQ2Sy9ytxCYjMysBRDYLL3I3UJgMjKzFkBgs/
+  QidwuBycjMWgCBzdKL3C0EJiMzawEENksvcrcQmIzMrAUQ2Cy9yN1CYDIysxZAYLP0IncLgcnIzFoAgc3Si9yt6wKfb+1/
+  6/svXZ5O7gQLikLg6YYJp++4LXZXvoP/
+  D8dqK+dWg0C5AAAAAElFTkSuQmCC" alt="" width="15px" height="16px" style="margin-top: 5px;" class="ico">
+
+</button>
+
+<button type="submit" style=" margin-top: 0px;" id="dropdown-button" onclick="openWindow()">
+  <h3 width="15px" height="16px" style="margin-top: 2px; color:#000000;" class="ico">Window</h3>
+</button>
+<div id="dropdown1" style="display: none; margin-top:-10px; margin-left:65px;"><button type="submit" onclick="toogleNav()" class="dropdown-action">Toogle Navigation</button><button type="submit" onclick="github()" class="dropdown-action">Source Code</button></div>
+      </div>
+      <script>function github(){
+      window.open("https://github.com/WojtekCodesToday/Madi-Paint", "_self");
+      }
+      </script>
+<!-- Toogle Button -->
+            <button style="position: absolute; right: 0; top:0;" onclick="toogleNav()">Toogle Navigation</button>
+            <script>
+              function openWindow() {
+  var x = document.getElementById("dropdown1");
   var y = document.getElementById("draw");
   var m = "block";
   if (x.style.display === "none") {
-    x.style.display = "block";
+    x.style.display = "grid";
+    x.style.zIndex = x.style.zIndex + 1000;
     m = "block";
   } else {
     x.style.display = "none";
     m = "none";
   }
-
-  if (m === "block") {
-    y.style.cursor = "click";
-    document.removeEventListener("mousemove", draw);
-    document.removeEventListener("mousedown" ,setPosition)
-    document.removeEventListener("mouseenter", setPosition);
-    document.removeEventListener("ontouchmove", draw);
-    document.removeEventListener("ontouchdown" ,setPosition)
-    document.removeEventListener("ontouchenter", setPosition);
-
-  console.log("Canvas Stopped!");
+}
+               function toogleNav(){
+                var nav = document.getElementById("nav");
+                var x = document.getElementById("colour-window");
+                var m = document.getElementById("dropdown");
+  if (nav.style.display === "none") {
+    nav.style.display = "block";
+    m.style.display = "none";
   } else {
-    y.style.cursor = "crosshair";
-
-document.addEventListener("mousemove", draw);
-document.addEventListener("mousedown", setPosition);
-document.addEventListener("mouseenter", setPosition);
-document.addEventListener("ontouchmove", draw);
-document.addEventListener("ontouchdown" ,setPosition)
-document.addEventListener("ontouchenter", setPosition);
+    nav.style.display = "none";
+    m.style.display = "none";
   }
-window.addEventListener("onload", resize);
-  var y = document.getElementById("canvas-style");
-
 }
 
-function clearCanvas(){
-var canvas = document.getElementById("draw");
-var ctx = canvas.getContext("2d");
-ctx.clearRect(0, 0, canvas.width, canvas.height);
-}
-
-function runJS() {
-  document.getElementById("colour-preview").style.backgroundColor = document.getElementById("hex").value;
-  document.getElementById("color-preview-html").style.backgroundColor = document.getElementById("hex").value;
-  document.getElementById("rgb-values").innerHTML = document.getElementById("hex").value;
-  document.getElementById("draw").style.backgroundColor = document.getElementById("hex1").value;
-  if(document.getElementById("hex1").value === "") {
-    document.getElementById("draw").style.backgroundColor = "#ffffff"
-  }else{
-    document.getElementById("hex1").value
-  }
-  setTimeout(runJS, 0000);
-}
-window.addEventListener("onload", runJS);
-     </script>
+            </script>
+    <div class="flex1">
+    <!--
+      Tools to paint
+                                   ________________  ________  ________________
+      #####  ####################  |              |  |      |  |              |
+      # % #  # Clear the canvas #  | rgb(0, 0, 0) |  |  3   |  | rgb(0, 0, 0) |
+      #####  ####################  |______________|  |______|  |______________|
+    -->
+    <!-- Script for some tools -->
     <script>
+       function customBG(){
+          var canvas = document.getElementById("draw");
+          var ctx = canvas.getContext("2d");
+          ctx.beginPath(); // begin the drawing path
+          ctx.lineWidth = 999; // width of line
+          ctx.lineCap = "round"; // rounded end cap
+          ctx.strokeStyle = document.getElementById("hex1").value; // hex color of line
+          ctx.moveTo(0, 0); // from position
+          ctx.lineTo(500, 0); // to position
+          ctx.stroke(); // draw it!
+          closeNew();
+         }
+
+    </script>
+   <button type="submit" id="button-colour" onclick="openColorpicker()"><div id="colour-preview"></div></button>
+   <button type="submit" id="button-text" onclick="openCreateText()">Text</button>
+    <button type="submit" onclick="clearCanvas()">Clear the canvas</button>
+    
+    <input id="hex" placeholder="enter hex color..." value="rgb(000, 000, 000)"></input>
+    <input type="number" name="size" id="size" value="3" min="0.5';" placeholder="enter a valid size value...">
+    <input id="hex1" placeholder="enter an valid background color..." value="rgb(255, 255, 255)"></input>
+    <!-- Color Picker Window -->
+    <div id="colour-window" style="margin-top: 15px; margin-left: 15px;">
+      <div id="grab-window">
+      <div class="flex2">
+        <h2 style="margin-top: 10px; margin-left: 140px;">Colour Picker</h2>
+        <?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg style="margin-left: 50%;  margin-top:-25px; width: 30px;" onclick="openColorpicker()" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="99" height="99" viewBox="0 0 99 99" xml:space="preserve">
+<desc>Created with Fabric.js 3.6.3</desc>
+<defs>
+</defs>
+<g transform="matrix(1.25 0 0 1.25 50 50)"  >
+<circle style="stroke: rgb(0,0,0); stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(74,147,222); fill-rule: nonzero; opacity: 1;" vector-effect="non-scaling-stroke"  cx="0" cy="0" r="40" />
+</g>
+<g transform="matrix(0.48 -0.48 0.48 0.48 49.51 49.51)"  >
+<path style="stroke: rgb(0,0,0); stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(255,255,255); fill-rule: nonzero; opacity: 1;" vector-effect="non-scaling-stroke"  transform=" translate(-62.2, -20.73)" d="m 20.013628 0 l 84.37401 0 l 0 0 c 11.053215 -1.04756605e-14 20.013626 9.282301 20.013626 20.7326 c 0 11.450296 -8.960411 20.7326 -20.013626 20.7326 l -84.37401 0 l 0 0 c -11.053222 0 -20.013628 -9.282303 -20.013628 -20.7326 c -5.2380687e-15 -11.450298 8.960406 -20.7326 20.013628 -20.7326 z" stroke-linecap="round" />
+</g>
+<g transform="matrix(0.48 0.48 -0.48 0.48 49.38 49.38)"  >
+<path style="stroke: rgb(0,0,0); stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(255,255,255); fill-rule: nonzero; opacity: 1;"  transform=" translate(-62.2, -20.73)" d="m 20.013628 0 l 84.37401 0 l 0 0 c 11.053215 -1.04756605e-14 20.013626 9.282301 20.013626 20.7326 c 0 11.450296 -8.960411 20.7326 -20.013626 20.7326 l -84.37401 0 l 0 0 c -11.053222 0 -20.013628 -9.282303 -20.013628 -20.7326 c -5.2380687e-15 -11.450298 8.960406 -20.7326 20.013628 -20.7326 z" stroke-linecap="round" />
+</g>
+</svg>
+</div></div>
+      <style>
+      .ui-draggable{
+        cursor: grab;
+      }
+      .ui-draggable-dragging{
+        cursor: grabbing;
+      }
+      #color-mode{
+     width: 500px;
+  -webkit-appearance: menulist-button;  
+  -moz-appearance:none;
+      }</style>
+      <select name="color-type" id="color-mode" style="display: none;">
+      <option value="hsl">HSL</option>
+      <option value="rgb">RGB</option>
+      </select>
+      <div class="hsl">
+      </div>
+
+      <div id="color-rgb" style="display: block;">
+      <canvas id="colorCanvas" class="color-canvas" width="500" height="400" style="cursor: crosshair; margin-left: 0px;"></canvas>
+      <div id="color-container" style=" margin-left:520px; margin-right: 20px; margin-top: -400px; margin-bottom: 0px; display: grid;">
+
+      R:<input type="range" name="red" id="red" min="0" max="255" value="255">
+      G:<input type="range" name="green" id="green" min="0" max="255" value="255">
+      B:<input type="range" name="blue" id="blue" min="0" max="255" value="255">
+      <button onclick="advancedColorpicker()">Update Colors</button>
+      <button onclick="addCustomColor()">Add color</button>
+      Custom Colors:
+      <div id="custom-colors" style="width:165px; height:212px; display:block; overflow-y: scroll;"></div>
+      <script>    
+      function addCustomColor(){
+      var customcolor = document.createElement("div");
+      var r = document.getElementById("red");
+    var g = document.getElementById("green");
+    var b = document.getElementById("blue");
+   //Needed for  changing sliders
+
+    var color = "rgb(" + r.value + ", " + g.value + ", " + b.value + ")";
+    var cr = document.createElement("p");
+    cr.id = "red1";
+    cr.innerText = r.value;
+    var cg = document.createElement("p");
+    cg.id = "green1";
+    cg.innerText = g.value;
+    var cb = document.createElement("p");
+    cb.id = "blue1";
+    cb.innerText = b.value;
+
+    var grab = document.createElement("p");
+    grab.innerHTML = "#";
+    grab.className = "handle";
+    grab.style.marginTop = "0px";
+    customcolor.append(grab);
+
+    var list = document.getElementById("custom-colors");
+
+      // All CSS Properties for RGB Values of custom colors
+    cr.style.marginLeft = "40px";
+    cg.style.marginLeft = "10px";
+    cb.style.marginLeft = "10px";
+    cr.style.marginTop = "0px";
+    cg.style.marginTop = "0px";
+    cb.style.marginTop = "0px";
+      // All CSS Properties for custom colors
+      customcolor.style.backgroundColor = "" + color;
+      customcolor.style.color = "#ffffff";
+      customcolor.style.fontSize = "15px";
+      customcolor.style.borderRadius = "5px";
+      customcolor.style.height = "25px";
+      customcolor.style.textAlign = "center";
+        customcolor.style.marginTop = "10px";
+      customcolor.style.marginbottom = "5px";
+      customcolor.style.marginLeft = "10px";
+      customcolor.style.marginRight = "10px";
+      customcolor.className = "customColor";
+      customcolor.style.display = "flex";
+
+      customcolor.style.borderWidth = "10px";
+      customcolor.onclick = function (){
+        var hex = document.getElementById("hex");
+        hex.value = customcolor.style.backgroundColor;
+        r.value = cr.value;
+        g.value = cg.value;
+        b = cb.value;
+      };
+      list.append(customcolor);
+      customcolor.append(cr);
+      customcolor.append(cg);
+      customcolor.append(cb);
+      }
+
+function advancedColorpicker(){;
+    var r = document.getElementById("red").value;
+    var g = document.getElementById("green").value;
+    var b = document.getElementById("blue").value;
+    var color = "rgb(" + r + ", " + g + ", " + b + ")";
+        var textbox = document.getElementById("hex");
+    textbox.value = "" + color, "color:" + color;
+}
+
+// Color Picker
+
 function initColorPicker() {
   var canvas = document.getElementById('colorCanvas');
   var canvasContext = canvas.getContext('2d');
@@ -125,37 +919,379 @@ function initColorPicker() {
   gradient.addColorStop(1, 'rgba(0, 0, 0, 1)')
   canvas.getContext('2d').fillStyle = gradient
   canvas.getContext('2d').fillRect(0, 0, canvas.width, canvas.height)
-
-
-  canvas.onclick = function(e) {
-  	console.log()
+  canvas.onclick = function (e){
     var imgData = canvasContext.getImageData((e.offsetX / canvas.clientWidth) * canvas.width, (e.offsetY / canvas.clientHeight) * canvas.height, 1, 1)
     var rgba = imgData.data;
-    var color = "rgba(" + rgba[0] + ", " + rgba[1] + ", " + rgba[2] + ", " + rgba[3] + ")";
+    var r = document.getElementById("red").value = rgba[0];
+    var g = document.getElementById("green").value = rgba[1];
+    var b = document.getElementById("blue").value = rgba[2];
+    var color = "rgb(" + r + ", " + g + ", " + b + ")";
         var textbox = document.getElementById("hex");
-    textbox.value = "" + color, "color:" + color;
+    textbox.value = "" + color, "color:" + color
   }
-}
+  }
 
 initColorPicker()
 
+      </script>
+          <div style="margin-bottom: 30px;"></div>
+    </div>
+
+      <div id="color-preview-html" style="cursor:pointer;"><p id="rgb-values"></p></div>
+
+    </div></div>
+    <div id="text-window" style="display:none; margin-top: 30px; margin-left: 30px;">
+      <div id="grab-window">
+      <div class="flex2" style="margin-left: 60px; margin-right: 60px;">
+        <h2 style="margin-top: 10px; margin-left: 0px;">Create Text</h2>
+        <?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg onclick="openCreateText()" style="margin-left: 35%;  margin-top:-25px; width: 45px;" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="99" height="99" viewBox="0 0 99 99" xml:space="preserve">
+<desc>Created with Fabric.js 3.6.3</desc>
+<defs>
+</defs>
+<g transform="matrix(1.25 0 0 1.25 50 50)"  >
+<circle style="stroke: rgb(0,0,0); stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(74,147,222); fill-rule: nonzero; opacity: 1;" vector-effect="non-scaling-stroke"  cx="0" cy="0" r="40" />
+</g>
+<g transform="matrix(0.48 -0.48 0.48 0.48 49.51 49.51)"  >
+<path style="stroke: rgb(0,0,0); stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(255,255,255); fill-rule: nonzero; opacity: 1;" vector-effect="non-scaling-stroke"  transform=" translate(-62.2, -20.73)" d="m 20.013628 0 l 84.37401 0 l 0 0 c 11.053215 -1.04756605e-14 20.013626 9.282301 20.013626 20.7326 c 0 11.450296 -8.960411 20.7326 -20.013626 20.7326 l -84.37401 0 l 0 0 c -11.053222 0 -20.013628 -9.282303 -20.013628 -20.7326 c -5.2380687e-15 -11.450298 8.960406 -20.7326 20.013628 -20.7326 z" stroke-linecap="round" />
+</g>
+<g transform="matrix(0.48 0.48 -0.48 0.48 49.38 49.38)"  >
+<path style="stroke: rgb(0,0,0); stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(255,255,255); fill-rule: nonzero; opacity: 1;"  transform=" translate(-62.2, -20.73)" d="m 20.013628 0 l 84.37401 0 l 0 0 c 11.053215 -1.04756605e-14 20.013626 9.282301 20.013626 20.7326 c 0 11.450296 -8.960411 20.7326 -20.013626 20.7326 l -84.37401 0 l 0 0 c -11.053222 0 -20.013628 -9.282303 -20.013628 -20.7326 c -5.2380687e-15 -11.450298 8.960406 -20.7326 20.013628 -20.7326 z" stroke-linecap="round" />
+</g>
+</svg>
+      </div></div>
+      <script>    
+      </script>
+      <div style="display:grid; margin-top: 20px; margin-left: 10px; margin-right: 10px;">
+      Text:
+      <input type="text" name="" id="text-value" placeholder="type text here...">
+      <!-- X: 500, Y: 390 -->
+      Size: <input type="number" name="" id="text-size" min="10" max="200">
+      X: <input type="number" name="" id="text-x" min="0" max="500">
+      Y: <input type="number" name="" id="text-y" min="0" max="390">
+      <button onclick="createText()">Create Text</button>
+      <script>
+        document.onkeydown = function clearThumb(){
+          ctxthumb.clearRect(0, 0, canvasthumb.width, canvasthumb.height);
+        }
+      document.getElementById("text-window").onchange = function createTextThumb(){
+        ctxthumb.clearRect(0,0,canvasthumb.width,canvasthumb.height);
+      var x = document.getElementById("text-x").value;
+      var y = document.getElementById("text-y").value;
+      var s = document.getElementById("text-size").value;
+        ctxthumb.font =  s + "px Arial";
+        ctxthumb.fillText(document.getElementById("text-value").value, x, y);
+      }
+      function createText(){
+        const canvasthumb = document.getElementById("draw-thumb");
+        const dataURL = canvasthumb.toDataURL('image/jpeg', 1.0);
+      ctx.drawImage(dataURL,0,0,canvasthumb.width,canvasthumb.height);
+      }
+      function openCreateText() {
+  var x = document.getElementById("text-window");
+  var y = document.getElementById("draw");
+  var nav = document.getElementById("nav");
+  var m = "block";
+  if (x.style.display === "none") {
+    x.style.display = "block";
+    m = "block";
+    nav.style.display = "none";
+  } else {
+    x.style.display = "none";
+    m = "none";
+    nav.style.display = "block";
+  }
+
+  if (m === "block") {
+    y.style.cursor = "not-allowed";
+    document.removeEventListener("mousemove", draw);
+    document.removeEventListener("mousedown" ,setPosition)
+    document.removeEventListener("mouseenter", setPosition);
+    document.removeEventListener("ontouchmove", draw);
+    document.removeEventListener("ontouchdown" ,setPosition)
+    document.removeEventListener("ontouchenter", setPosition);
+
+  console.log("Canvas Stopped!");
+  } else {
+    y.style.cursor = "crosshair";
+
+document.addEventListener("mousemove", draw);
+document.addEventListener("mousedown", setPosition);
+document.addEventListener("mouseenter", setPosition);
+document.addEventListener("ontouchmove", draw);
+document.addEventListener("ontouchdown" ,setPosition)
+document.addEventListener("ontouchenter", setPosition);
+  }
+}
+
+      </script>
+      </div>
+          <div style="margin-bottom: 30px;"></div>
+    </div>
+
+    </div>
+    <!-- Fullscreen, coming soon -->
+    <button style="width: 30px; height: 30px;"><?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+      <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+      <svg  width="30" height="30" style="margin-left: -8px; margin-top: -3px;" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="287" height="287" viewBox="0 0 287 287" xml:space="preserve">
+      <desc>Created with Fabric.js 3.6.3</desc>
+      <defs>
+      </defs>
+      <g transform="matrix(2.87 0 0 2.87 143.5 143.5)"  >
+      <polygon style="stroke: rgb(0,0,0); stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(237,237,237); fill-rule: nonzero; opacity: 1;"  points="-50,-50 -50,50 50,50 50,-50 " />
+      </g>
+      <g transform="matrix(0.7 -0.7 0.7 0.7 217.49 69.38)"  >
+      <path style="stroke: rgb(190,190,190); stroke-width: 8; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(190,190,190); fill-rule: evenodd; opacity: 1;"  transform=" translate(-59.83, -29.92)" d="m 0 14.960629 l 89.732285 0 l 0 -14.960629 l 29.921257 29.921259 l -29.921257 29.921259 l 0 -14.9606285 l -89.732285 0 z" stroke-linecap="round" />
+      </g>
+      <g transform="matrix(-0.7 -0.7 0.7 -0.7 73.49 69.77)"  >
+      <path style="stroke: rgb(190,190,190); stroke-width: 8; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(190,190,190); fill-rule: evenodd; opacity: 1;"  transform=" translate(-59.83, -29.92)" d="m 0 14.960629 l 89.732285 0 l 0 -14.960629 l 29.921257 29.921259 l -29.921257 29.921259 l 0 -14.9606285 l -89.732285 0 z" stroke-linecap="round" />
+      </g>
+      <g transform="matrix(0.7 0.7 0.7 -0.7 214.54 217.66)"  >
+      <path style="stroke: rgb(190,190,190); stroke-width: 8; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(190,190,190); fill-rule: evenodd; opacity: 1;"  transform=" translate(-59.83, -29.92)" d="m 0 14.960629 l 89.732285 0 l 0 -14.960629 l 29.921257 29.921259 l -29.921257 29.921259 l 0 -14.9606285 l -89.732285 0 z" stroke-linecap="round" />
+      </g>
+      <g transform="matrix(-0.7 0.7 0.7 0.7 70.54 217.37)"  >
+      <path style="stroke: rgb(190,190,190); stroke-width: 8; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(190,190,190); fill-rule: evenodd; opacity: 1;"  transform=" translate(-59.83, -29.92)" d="m 0 14.960629 l 89.732285 0 l 0 -14.960629 l 29.921257 29.921259 l -29.921257 29.921259 l 0 -14.9606285 l -89.732285 0 z" stroke-linecap="round" />
+      </g>
+      </svg></button>
+    <!-- The paint editor -->
+    <div id="canvas-style-thumb"><canvas id="draw-thumb" style="z-index:5; cursor: crosshair;" width="500" height="390"></canvas></div>
+    <div id="canvas-style"><canvas id="draw"></canvas></div>
+    </div>
+
+    <!-- Small Notes and the requested URL -->
+    <!-- The Gamepad Cursor -->
+    <div id="cur" style="display: none; position: absolute;"><?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="20" height="20" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="137" height="137" viewBox="0 0 137 137" xml:space="preserve">
+<desc>Created with Fabric.js 3.6.3</desc>
+<defs>
+</defs>
+<g transform="matrix(1 0 0 1 69 69)"  >
+<polygon style="stroke: rgb(0,0,0); stroke-width: 5; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(255,255,255); fill-rule: nonzero; opacity: 1;" vector-effect="non-scaling-stroke"  points="-50,-50 -50,50 50,50 50,-50 " />
+</g>
+</svg></div>
+    <script>
+    if ('getGamepads' in navigator) {
+    console.log("Gamepad API is Supported in this browser.");
+  // The API is supported!
+
+    // WARNING:
+    // Controller support is only made for the PS4,
+    // not for the XBOX ONE, XBOX 360, PS3, etc.. 
+    // please fork this project to add more controler support. 
+
+    // PS4 Controller support is in (beta):
+    // CONTROLS:
+    // Use left joystick to move your cursor
+    // Use [ Triangle ] button to save your image
+
+var ball = document.getElementById("cur");
+var start;
+var a = 0;
+var b = 0;
+
+var rAF = window.mozRequestAnimationFrame ||
+  window.webkitRequestAnimationFrame ||
+  window.requestAnimationFrame;
+
+var rAFStop = window.mozCancelRequestAnimationFrame ||
+  window.webkitCancelRequestAnimationFrame ||
+  window.cancelRequestAnimationFrame;
+
+window.addEventListener("gamepadconnected", function() {
+  var gp = navigator.getGamepads()[0];
+
+  gameLoop();
+});
+
+window.addEventListener("gamepaddisconnected", function() {
+
+  rAFStop(start);
+});
+
+if(!('GamepadEvent' in window)) {
+  // No gamepad events available, poll instead.
+  var interval = setInterval(pollGamepads, 500);
+  console.log("No gamepads found in this system.");
+}
+
+function pollGamepads() {
+  var gamepads = navigator.getGamepads ? navigator.getGamepads() : (navigator.webkitGetGamepads ? navigator.webkitGetGamepads : []);
+  for (var i = 0; i < gamepads.length; i++) {
+    var gp = gamepads[i];
+    if(gp) {
+      gameLoop();
+      clearInterval(interval);
+    }
+  }
+}
+
+function buttonPressed(b) {
+  if (typeof(b) == "object") {
+    return b.pressed;
+  }
+  return b == 1.0;
+}
+
+function gameLoop() {
+  var gamepads = navigator.getGamepads ? navigator.getGamepads() : (navigator.webkitGetGamepads ? navigator.webkitGetGamepads : []);
+  if (!gamepads)
+    return;
+
+  var gp = gamepads[0];
+
+  if(gp.axes[0] != 0) {
+
+    a += gp.axes[0]  * 2;
+    ball.style.display = "block";
+  }
+    if(gp.axes[1] != 0) {
+
+    b += gp.axes[1]  * 2;
+    ball.style.display = "block";
+
+  }
+  ball.style.left = a*2 + "px";
+  ball.style.top = b*2 + "px";
+  ball.style.zIndex = "500000000000000";
+  console.log("Console Cursor X: ", ball.style.left, " Y: ", ball.style.top);
+
+    if (buttonPressed(gp.buttons[0])) {
+      // ( X ) button in PS4
+      var gpx = ball.style.left + 10;
+      var gpy = ball.style.top + 10;
+        jQuery(document.elementsFromPoint(parseInt(gpx.replace('px', '')), parseInt(gpy.replace('px', '')))).click();
+  }
+
+      if (buttonPressed(gp.buttons[3])) {
+        // ( ∆ ) button in PS4
+        saveImage();
+  }
+      if (buttonPressed(gp.buttons[9])) {
+        // OPTION button in PS4
+        openIcon();
+  }
+console.clear();
+setTimeout(gameLoop, 0000);
+};
+}
+  </script>
+    <div id="gamepad-info"></div>
+    <div id="operatingsystem"></div>
+    <div id="note">
+      <p>Touch support is hard, so make me an .js file that has touch controls</p>
+    </div>
+    <div style="display: none; background-color: #656565AA; position: absolute; top: 0; left:0; width: 100%; height: 100%; z-index: 1500; cursor:not-allowed" id="save">
+
+  <div id="save-as-dialog" style="width: 50%; height: 130px; top: 50%; left: 100%; margin: -100px 0 0 -75%; font-family: Arial, Helvetica, sans-serif;
+  letter-spacing: 2px; word-spacing: 2px; color: #000000; font-weight: 700; text-decoration: none; font-style: normal; font-variant: normal; text-transform: none; text-align: center; 
+  position: absolute; display: block; align-self: center; align-content: center; align-items: center; background-color: #FFFFFF; z-index: 1550; -webkit-box-shadow: 0px 5px 9px 5px rgba(0,0,0,0.82); box-shadow: 0px 5px 9px 5px rgba(0,0,0,0.82); cursor: default;"><div> <h1>Save As</h1> <?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg onclick="closeSaveAs()" width="30" style="display:flex; position:absolute; top:0; right:0; margin-top:-25px; margin-right:10px;" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="99" height="99" viewBox="0 0 99 99" xml:space="preserve">
+<desc>Created with Fabric.js 3.6.3</desc>
+<defs>
+</defs>
+<g transform="matrix(1.25 0 0 1.25 50 50)"  >
+<circle style="stroke: rgb(0,0,0); stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(74,147,222); fill-rule: nonzero; opacity: 1;" vector-effect="non-scaling-stroke"  cx="0" cy="0" r="40" />
+</g>
+<g transform="matrix(0.48 -0.48 0.48 0.48 49.51 49.51)"  >
+<path style="stroke: rgb(0,0,0); stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(255,255,255); fill-rule: nonzero; opacity: 1;" vector-effect="non-scaling-stroke"  transform=" translate(-62.2, -20.73)" d="m 20.013628 0 l 84.37401 0 l 0 0 c 11.053215 -1.04756605e-14 20.013626 9.282301 20.013626 20.7326 c 0 11.450296 -8.960411 20.7326 -20.013626 20.7326 l -84.37401 0 l 0 0 c -11.053222 0 -20.013628 -9.282303 -20.013628 -20.7326 c -5.2380687e-15 -11.450298 8.960406 -20.7326 20.013628 -20.7326 z" stroke-linecap="round" />
+</g>
+<g transform="matrix(0.48 0.48 -0.48 0.48 49.38 49.38)"  >
+<path style="stroke: rgb(0,0,0); stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(255,255,255); fill-rule: nonzero; opacity: 1;"  transform=" translate(-62.2, -20.73)" d="m 20.013628 0 l 84.37401 0 l 0 0 c 11.053215 -1.04756605e-14 20.013626 9.282301 20.013626 20.7326 c 0 11.450296 -8.960411 20.7326 -20.013626 20.7326 l -84.37401 0 l 0 0 c -11.053222 0 -20.013628 -9.282303 -20.013628 -20.7326 c -5.2380687e-15 -11.450298 8.960406 -20.7326 20.013628 -20.7326 z" stroke-linecap="round" />
+</g>
+</svg>
+  <div style=" position:absolute; left:0; right:0; display:flex; height:20px; align-items: center; text-align: center; margin-left:25%;">
+    <select id="formats" onchange="verifyDownload()">
+
+      <option selected value=".png"><img src="" alt="photo"> PNG</option>
+      <option value="text">data:image</option>
+
+    </select>
+    <input type="text" name="filename" id="filename" value="drawing" placeholder="Please enter a valid filename...">
+    <button onclick="saveImageFormat()" id="downloadbutton1">Download</button>
+    <div id="txtdata1" style="display: none; margin-left: -40%; margin-top: 250px;">
+      Copy this data and upload it to the web:
+    <textarea readonly name="source" id="imgsource" cols="70" rows="10" style="resize:none"></textarea>
+    </div><script>
+      function closeSaveAs() {
+        var dialog = document.getElementById("save");
+        dialog.style.display = "none";
+        document.addEventListener("mousemove", draw);
+document.addEventListener("mousedown", setPosition);
+document.addEventListener("mouseenter", setPosition);
+document.addEventListener("ontouchmove", draw);
+document.addEventListener("ontouchdown" ,setPosition)
+document.addEventListener("ontouchenter", setPosition);
+var y = document.getElementById("draw");
+    y.style.cursor = "crosshair";
+      }
+        function verifyDownload() {
+        var formats = document.getElementById("formats").selectedIndex;
+        var options = document.getElementsByTagName("option");
+        var button = document.getElementById("downloadbutton1");
+        var dialog = document.getElementById("save-as-dialog");
+        var dataimage = document.getElementById("txtdata1");
+        var filename = document.getElementById("filename");
+        if (options[formats].value === "text"){
+         button.style.display = "none";
+         filename.style.display = "none";
+         dataimage.style.display = "grid";
+         dialog.style.height = "330px";
+         dialog.style.top = "35%"
+         saveTxt();
+        } else {
+         button.style.display = "block";
+         filename.style.display = "block";
+         dataimage.style.display = "none";
+         dialog.style.height = "130px";
+         dialog.style.top = "50%"
+        };
+        setTimeout(verifyDownload, 0000);
+        }
     </script>
+    </div></div>
+  </div>
     <style>
+    /*/ CSS /*/
+      body{
+        overflow: hidden;
+        user-select: none;
+      }
+
+      select{
+       background-color: #ffffff;
+       border-width: 2px;
+       border-style:dotted;
+       border-color: #A0A0A0;
+       padding: 6px 8px;
+      }
+
+      button:hover{
+          fill: #ffffff;
+          fill-rule: evenodd;
+      }
     button{
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 100;
     letter-spacing: 0px;
     word-spacing: 0px;
-    color: #000000;
+    background-color: #FFFFFF;
+    color: #522d2d;
+    border-color: rgb(128, 128, 128);
     font-weight: 700;
     text-decoration: none solid rgb(68, 68, 68);
     font-style:normal;
     font-variant: normal;
+    padding: 1px 6px;
     text-transform: none;
+    border-radius: 5px;
+    border-style: groove;
+    border-width: 2px;
     }
     input{
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 100;
     letter-spacing: 0px;
     word-spacing: 0px;
     color: #000000;
@@ -165,13 +1301,18 @@ initColorPicker()
     font-variant: normal;
     text-transform: none;
     }
+    #input-text:hover{
+      -webkit-box-shadow: 0px 0px 5px 1px #656565; 
+        box-shadow: 0px 0px 5px 1px #656565;
+    }
+    
+
 
     button:hover{
   border-width: 1.5px;
   background-color: #4a93de;
-  color: #fff;
-  appearance: auto;
-    writing-mode: horizontal-tb !important;
+  color: #ffffff;
+    writing-mode: horizontal-tb;
     text-rendering: auto;
     letter-spacing: normal;
     word-spacing: normal;
@@ -184,13 +1325,44 @@ initColorPicker()
     align-items: flex-start;
     cursor: default;
     box-sizing: border-box;
-    padding: 1px 6px;
     border-width: 2px;
     border-style: outset;
     border-color: transparent;
-    border-image: initial;
+    cursor: pointer;
 }
 
+::selection {
+  color: #000000;
+  background: rgb(35, 145, 248);
+}
+
+    .customColor{
+      -webkit-box-shadow: 0px 0px 8px 8px #121212; 
+        box-shadow: 0px 0px 5px 1px #121212;
+    }
+
+      /*/ The canvas thumbnail, showing where you will place your text, shapes etc/*/
+      #draw-thumb{
+         position: absolute;
+         left: 0;
+        
+        background-color: transparent;
+        margin-top: 15px;
+        margin-left: 15px;
+        border-radius: 10px;
+            }
+       #canvas-style-thumb{
+        display: block;
+         position: absolute;
+         left: 0;
+         margin-top: 37px;
+         background-color: rgb(167, 167, 167);
+       border-width: 10px;
+       border-color: rgb(167, 167, 167);
+       border-radius: 10px;
+       width: 530px;
+       height: 420px;
+       }
 
       /*/ The canvas, in CSS so that the user can see wheres the canvas /*/
        #draw{
@@ -227,10 +1399,6 @@ initColorPicker()
         display: flex;
         max-height: 48px;
       }
-       .color-canvas{
-         border-top-left-radius: 10px;
-         border-top-right-radius: 10px;
-       }
 
        #button-colour{
          width: 30px;
@@ -254,9 +1422,9 @@ initColorPicker()
         text-transform: none;
         
         border-radius: 10px;
-        border-top-left-radius: 0px;
         background-color: #ffffff;
         position: absolute;
+        margin-left: -100px;
         z-index: 999;
         -webkit-box-shadow: 7px 7px 13px 4px #656565; 
         box-shadow: 7px 7px 13px 4px #656565;
@@ -278,13 +1446,34 @@ initColorPicker()
         
       margin-bottom: 5px;
       margin-top: 3px;
-      filter: saturate(0) grayscale(1) brightness(.7) contrast(100%) invert(100%);
     }
+
+      #text-window{
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: auto;
+        letter-spacing: 0px;
+        word-spacing: 0px;
+        color: #000000;
+        font-weight: 700;
+        text-decoration: none solid rgb(68, 68, 68);
+        font-style: normal;
+        font-variant: normal;
+        text-transform: none;
+        
+        border-radius: 10px;
+        background-color: #ffffff;
+        position: absolute;
+        margin-left: -100px;
+        z-index: 999;
+        -webkit-box-shadow: 7px 7px 13px 4px #656565; 
+        box-shadow: 7px 7px 13px 4px #656565;
+        }
 
     #note{
       position: absolute;
       display: block;
       bottom: 0;
+      left: 0;
       color: #cecece;
 
       font-family: Arial, Helvetica, sans-serif;
@@ -297,9 +1486,313 @@ initColorPicker()
     font-variant: normal;
     text-transform: none;
     }
+
+    #operatingsystem{
+      position: absolute;
+      display: block;
+      bottom: 0;
+      color: #cecece;
+      font-family: Arial, Helvetica, sans-serif;
+    font-size: 100;
+    letter-spacing: 0px;
+    word-spacing: 0px;
+    font-weight: 700;
+    text-decoration: none solid rgb(68, 68, 68);
+    font-style:normal;
+    font-variant: normal;
+    text-transform: none;
+    }
+
+    #gamepad-info{
+      position: absolute;
+      display: block;
+      bottom: 0;
+      color: #cecece;
+      font-family: Arial, Helvetica, sans-serif;
+    font-size: 100;
+    letter-spacing: 0px;
+    word-spacing: 0px;
+    font-weight: 700;
+    text-decoration: none solid rgb(68, 68, 68);
+    font-style:normal;
+    font-variant: normal;
+    text-transform: none;
+    }
+
+    #dropdown{
+      position: absolute;
+      background-color: #ffffff;
+      border-radius: 10px;
+      border-top-left-radius: 2px;
+      -webkit-box-shadow: 11px 11px 21px 7px rgba(0,0,0,0.68); 
+      box-shadow: 11px 11px 21px 7px rgba(0,0,0,0.68);
+      display: grid;
+      display: -ms-grid;
+      z-index: 1000;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        width: 130px;
+      }
+      #dropdown1{
+      position: absolute;
+      background-color: #ffffff;
+      border-radius: 10px;
+      border-top-left-radius: 2px;
+      -webkit-box-shadow: 11px 11px 21px 7px rgba(0,0,0,0.68); 
+      box-shadow: 11px 11px 21px 7px rgba(0,0,0,0.68);
+      display: grid;
+      display: -ms-grid;
+      z-index: 1000;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        width: 130px;
+      }
+      .dropdown-action{
+        background-color: #fff;
+        border-radius: 0px;
+        height: 35px;
+        border: 30px none #FFFFFF;
+        margin-top: 10px;
+        margin-bottom: 10px;
+      }
+      .dropdown-action:hover{
+       background-color: #b9b9b9;
+       color: #ffffff;
+       border: 30px none #FFFFFF;
+      }
+
+      #dropdown-button{
+        background-color: #fff;
+        border-radius: 2px;
+        border: 30px none #FFFFFF;
+      }
+      #border-radius:hover{
+        margin-top: 5px;
+        background-color: #A9A9A9;
+        border-radius: 2px;
+        border: 30px none #A9A9A9;
+      }
     </style>
     <script>
+    // set canvas id to variable
+var canvas = document.getElementById("draw");
 
+var ctx = canvas.getContext("2d");
+
+var canvasthumb = document.getElementById("draw-thumb");
+
+var ctxthumb = canvasthumb.getContext("2d");
+// initialize position as 0,0
+var pos = 
+{
+   x: 0,
+   y: 0 
+  };
+
+
+
+
+function openAbout(){
+  var isMobile = navigator.userAgent.toLowerCase().match(/mobile/i);
+ 
+  // (B) DO SOMETHING...
+  if (isMobile) { 
+    console.log("Running an smaller device, Madi Editor 1.1"); 
+  }
+  else {
+      let params = `scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,
+width=800,height=400,left=300,top=150`;
+open('/about.html', 'About in Madi Paint', params);
+     }
+
+}
+
+function openIcon() {
+  var x = document.getElementById("dropdown");
+  var y = document.getElementById("draw");
+  var m = "block";
+  if (x.style.display === "none") {
+    x.style.display = "grid";
+    x.style.zIndex = x.style.zIndex + 1000;
+    m = "block";
+  } else {
+    x.style.display = "none";
+    m = "none";
+  }
+
+  if (m === "block") {
+    y.style.cursor = "not-allowed";
+    document.removeEventListener("mousemove", draw);
+    document.removeEventListener("mousedown" ,setPosition)
+    document.removeEventListener("mouseenter", setPosition);
+    document.removeEventListener("ontouchmove", draw);
+    document.removeEventListener("ontouchdown" ,setPosition)
+    document.removeEventListener("ontouchenter", setPosition);
+
+  console.log("Canvas Stopped!");
+  } else {
+    y.style.cursor = "crosshair";
+
+document.addEventListener("mousemove", draw);
+document.addEventListener("mousedown", setPosition);
+document.addEventListener("mouseenter", setPosition);
+document.addEventListener("ontouchmove", draw);
+document.addEventListener("ontouchdown" ,setPosition)
+document.addEventListener("ontouchenter", setPosition);
+  }
+}
+
+function saveTxt(){
+  var image = canvas.toDataURL();
+  // create temporary link
+  var tmpLink = document.createElement( 'a' );
+  document.getElementById("imgsource").innerText = tmpLink.href = image;
+}
+
+function saveImage() {
+        var dialog = document.getElementById("save");
+        dialog.style.display = "Block";
+        var formats = document.getElementById("formats").selectedIndex;
+        var options = document.getElementsByTagName("option");
+        var button = document.getElementById("downloadbutton1");
+        var dialog = document.getElementById("save-as-dialog");
+        var dataimage = document.getElementById("txtdata1");
+        document.removeEventListener("mousemove", draw);
+    document.removeEventListener("mousedown" ,setPosition)
+    document.removeEventListener("mouseenter", setPosition);
+    document.removeEventListener("ontouchmove", draw);
+    document.removeEventListener("ontouchdown" ,setPosition)
+    document.removeEventListener("ontouchenter", setPosition);
+    var x = document.getElementById("dropdown");
+
+    x.style.display = "none";
+      }
+
+function saveImageFormat(){
+      // get canvas data  
+      var image = canvas.toDataURL();  
+      var formats = document.getElementById("formats").selectedIndex;
+        var options = document.getElementsByTagName("option");
+        var button = document.getElementById("downloadbutton1");
+        var dialog = document.getElementById("save-as-dialog");
+        var dataimage = document.getElementById("txtdata1"); 
+  var tmpLink = document.createElement( 'a' );  
+      tmpLink.download = document.getElementById("filename").value, ".png"; // set the name of the download file 
+  tmpLink.href = image;  
+  document.getElementById("imgsource").innerText = tmpLink.href = image;
+  // temporarily add link to body and initiate the download  
+  document.body.appendChild( tmpLink );  
+  tmpLink.click();  
+  document.body.removeChild( tmpLink );  
+  closeSaveAs();
+}
+
+
+
+
+
+function openColorpicker() {
+  var x = document.getElementById("colour-window");
+  var y = document.getElementById("draw");
+  var nav = document.getElementById("nav");
+  var m = "block";
+  if (x.style.display === "none") {
+    x.style.display = "block";
+    m = "block";
+    nav.style.display = "none";
+  } else {
+    x.style.display = "none";
+    m = "none";
+    nav.style.display = "block";
+  }
+
+  if (m === "block") {
+    y.style.cursor = "not-allowed";
+    document.removeEventListener("mousemove", draw);
+    document.removeEventListener("mousedown" ,setPosition)
+    document.removeEventListener("mouseenter", setPosition);
+    document.removeEventListener("ontouchmove", draw);
+    document.removeEventListener("ontouchdown" ,setPosition)
+    document.removeEventListener("ontouchenter", setPosition);
+
+  console.log("Canvas Stopped!");
+  } else {
+    y.style.cursor = "crosshair";
+
+document.addEventListener("mousemove", draw);
+document.addEventListener("mousedown", setPosition);
+document.addEventListener("mouseenter", setPosition);
+document.addEventListener("ontouchmove", draw);
+document.addEventListener("ontouchdown" ,setPosition)
+document.addEventListener("ontouchenter", setPosition);
+  }
+window.addEventListener("onload", resize);
+  var y = document.getElementById("canvas-style");
+
+}
+
+function closeNew(){
+  var x = document.getElementById("new");
+    x.style.display = "none";
+    document.addEventListener("mousemove", draw);
+    document.addEventListener("mousedown", setPosition);
+    document.addEventListener("mouseenter", setPosition);
+    document.addEventListener("ontouchmove", draw);
+    document.addEventListener("ontouchstart" ,setPosition);
+    document.addEventListener("ondblclick", setPosition)
+
+    document.addEventListener('keydown', e => {
+  if (e.ctrlKey && e.key === 's') {
+    // Prevent the Save dialog to open
+    e.preventDefault();
+    saveImage();
+  }
+});
+}
+
+function clearCanvas(){
+var canvas = document.getElementById("draw");
+var ctx = canvas.getContext("2d");
+ctx.clearRect(0, 0, canvas.width, canvas.height);
+ctxthumb.clearRect(0, 0, canvasthumb.width, canvasthumb.height);
+}
+
+function runJS(e) {
+  document.getElementById("colour-preview").style.backgroundColor = document.getElementById("hex").value;
+  document.getElementById("color-preview-html").style.backgroundColor = document.getElementById("hex").value;
+  document.getElementById("rgb-values").innerHTML = document.getElementById("hex").value;
+  document.getElementById("draw").style.backgroundColor = document.getElementById("hex1").value;
+  document.getElementById("rgb-values").style.color = '#fff';
+  if (document.getElementById("hex").value === "") {
+    document.getElementById("draw").style.backgroundColor = "#ffffff"
+  } else {
+    document.getElementById("hex1").value
+  }
+  setTimeout(runJS, 0000);
+}
+runJS();
+
+onload = function setup(){
+
+  document.getElementById("dropdown").style.display = "none";
+  document.getElementById("operatingsystem").innerHTML = "URL: " + document.URL;
+  openColorpicker();
+
+    document.removeEventListener("mousemove", draw);
+    document.removeEventListener("mousedown" ,setPosition);
+    document.removeEventListener("mouseenter", setPosition);
+    document.removeEventListener("ontouchmove", draw);
+    document.removeEventListener("ontouchdown" ,setPosition);
+    document.removeEventListener("ontouchenter", setPosition);
+    document.addEventListener('keydown', e => {
+  if (e.ctrlKey && e.key === 's') {
+    // Prevent the Save dialog to open
+    e.preventDefault();
+  }});
+}
+window.addEventListener("onload", runJS);
+
+onmousemove = console.log("X: ", pos.x, "Y:", pos.y);
 
 resize();
 
@@ -309,15 +1802,12 @@ function resize() {
   ctx.canvas.height = 390;
 }
 
-// initialize position as 0,0
-var pos = { x: 0, y: 0 };
 
 // new position from mouse events
 function setPosition(e) {
   pos.x = e.pageX -15.0;
-  pos.y = e.pageY -60;
+  pos.y = e.pageY -145;
 }
-
 function draw(e) {
   if (e.buttons !== 1) return; // if mouse is not clicked, do not go further
   var size = document.getElementById("size").value;
@@ -332,6 +1822,7 @@ function draw(e) {
   ctx.moveTo(pos.x, pos.y); // from position
   setPosition(e);
   ctx.lineTo(pos.x, pos.y); // to position
+
 
   ctx.stroke(); // draw it!
 }
