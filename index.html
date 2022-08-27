@@ -14,16 +14,8 @@
     </head>
     <body onload="runJS()">
       <!--                                    
-##       ##    ######    #####    ###        #####     ######    ###  ##      #  #####
-# #     # #   #      #   #    #    #         #    #   #      #    #   # #     #    #
-#  #   #  #  ##########  #     #   #         #    #  ##########   #   #  #    #    #
-#   # #   #  #        #  #     #   #         #####   #        #   #   #   #   #    #
-#    #    #  #        #  #     #   #         #       #        #   #   #    #  #    #
-#         #  #        #  #    #    #         #       #        #   #   #     # #    #
-#         #  #        #  #####    ###        #       #        #  ###  #      ##    #
-
   This code is from https://github.com/wojtekcodestoday/madi-paint.
-  That is from version 1.1, the latest version of Madi Paint Editor
+  That is from version 2.2, the latest version of Madi Paint Editor
    is in https://wojtekcodestoday.github.io/madi-paint,
     also DON'T modify this file, or the editor will break.
     Have a nice day ;)
@@ -40,7 +32,8 @@
       <script>
       //APIs from other services, needed an internet connection
       function joke(){
-        var fetchtext = fetch("https://api.popcat.xyz/joke")
+          // Fetch an joke from JokeAPI, and if it contains JavaScript, and if it's not nsfw, racist or sexist :)
+        var fetchtext = fetch("https://v2.jokeapi.dev/joke/Any?blacklistFlags=nsfw,racist,sexist&type=twopart&contains=javascript")
         return fetchtext.joke
       }
       </script>
@@ -1053,7 +1046,7 @@ matrix(1 0 0 1 -618 -183)
       <div id="color-rgb" style="display: block;">
       <canvas id="colorCanvas" class="color-canvas" width="500" height="400" style="cursor: crosshair; margin-left: 0px;"></canvas>
       <div id="color-container" style=" margin-left:520px; margin-right: 20px; margin-top: -400px; margin-bottom: 0px; display: grid;">
-        <button onclick="randomcolors()">Randomize Colors</button>
+        <button onclick="randomcolors()" style="display:none;">Randomize Colors</button>
       R:<input type="range" name="red" id="red" min="0" max="255" value="255">
       G:<input type="range" name="green" id="green" min="0" max="255" value="255">
       B:<input type="range" name="blue" id="blue" min="0" max="255" value="255">
