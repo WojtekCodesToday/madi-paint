@@ -31,10 +31,12 @@
       </script>
       <script>
       //APIs from other services, needed an internet connection
-      function joke(){
-          // Fetch an joke from JokeAPI, and if it contains JavaScript, and if it's not nsfw, racist or sexist :)
-        var fetchtext = fetch("https://v2.jokeapi.dev/joke/Any?blacklistFlags=nsfw,racist,sexist&type=twopart&contains=javascript")
-        return fetchtext.joke
+      //https://v2.jokeapi.dev/joke/Any?blacklistFlags=nsfw,racist,sexist&type=twopart&contains=javascript
+      async function json1(url){
+          // Fetch an JSON data 
+          const response = await fetch(url);
+  const jsondata = await response.json();
+        return jsondata
       }
       </script>
       <div style="background-color: #656565AA; position: absolute;
